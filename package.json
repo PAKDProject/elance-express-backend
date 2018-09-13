@@ -1,10 +1,13 @@
 {
   "name": "linkedout-backend",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "This is the backend for project linked out. It is created in typescript and transpiled to common js using babel",
   "main": "dist/bin/start.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node dist/bin/start.js",
+    "start:dev": "export NODE_ENV=development && ts-node src/bin/start.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -18,11 +21,18 @@
   "author": "PAKD team",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.3"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/cors": "^2.8.4",
     "@types/express": "^4.16.0",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
     "typescript": "^3.0.3"
   }
 }
