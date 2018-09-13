@@ -1,0 +1,20 @@
+{
+  "name": "linkedout-backend",
+  "version": "0.0.0",
+  "description": "This is the backend for project linked out. It is created in typescript and transpiled to common js using babel",
+  "main": "dist/bin/start.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/pakdproject/linkedout-backend"
+  },
+  "keywords": [
+    "backend",
+    "express",
+    "typescript"
+  ],
+  "author": "PAKD team",
+  "license": "ISC"
+}
