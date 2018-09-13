@@ -16,5 +16,13 @@
     "typescript"
   ],
   "author": "PAKD team",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "typescript": "^3.0.3"
+  }
 }
