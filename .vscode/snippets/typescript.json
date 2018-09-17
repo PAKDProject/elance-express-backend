@@ -1,24 +1,73 @@
 {
-    "createController": {
-      "prefix": "routeController",
-      "body": [
-        "import { Router, Response, Request } from 'express'",
-        "import { BaseRouter } from '../lib/baseRouter'",
-        "",
-        "export class ${1}Controller implements BaseRouter {",
-        "\tbasePath: string = '/${2}'",
-        "",
-        "\tconstructor() {",
-        "\n\t}",
-        "",
-        "\treturnRouter() : Router {",
-        "\t\treturn Router()",
-        "\t\t.get('${3}', (req: Request, res: Response) => {",
-        "\t\t\tres.send()",
-        "\t\t})",
-        "\t}",
-        "}"
-      ],
-      "description": "Create a new controller"
-    }
+  "createController": {
+    "prefix": "routeController",
+    "body": [
+      "import { Router, Response, Request } from 'express'",
+      "import { BaseRouter } from '../lib/baseRouter'",
+      "",
+      "/**",
+      "* @class ${1}Controller used to control ${2} route",
+      "*/",
+      "export class ${1}Controller implements BaseRouter {",
+      "\t/**",
+      "\t* @property basePath used as a base for routing related to the index",
+      "\t*/",
+      "\tbasePath: string = '/${2}'",
+      "",
+      "\t/**",
+      "\t* @constructor",
+      "\t*/",
+      "\tconstructor() {",
+      "\n\t}",
+      "",
+      "\t/**",
+      "\t* Returns a configured router for the route",
+      "\t* @returns Router",
+      "\t*/",
+      "\treturnRouter() : Router {",
+      "\t\treturn Router()",
+      "\t\t\t.get('${3}', (req: Request, res: Response) => {",
+      "\t\t\t\tres.send()",
+      "\t\t\t})",
+      "\t}",
+      "}"
+    ],
+    "description": "Create a new controller"
+  },
+  "eGet" : {
+    "prefix": "eGet",
+    "body": [
+      ".get('${1}', (req: Request, res: Response) => {",
+      "\t${2}\n\tres.send()",
+      "})"
+    ],
+    "description": "Create a new get route"
+  },
+  "ePost" : {
+    "prefix": "ePost",
+    "body": [
+      ".post('${1}', (req: Request, res: Response) => {",
+      "\t${2}\n\tres.send()",
+      "})"
+    ],
+    "description": "Create a new post route"
+  },
+  "eDelete" : {
+    "prefix": "eDelete",
+    "body": [
+      ".delete('${1}', (req: Request, res: Response) => {",
+      "\t${2}\n\tres.send()",
+      "})"
+    ],
+    "description": "Create a new delete route"
+  },
+  "eUpdate" : {
+    "prefix": "eUpdate",
+    "body": [
+      ".patch('${1}', (req: Request, res: Response) => {",
+      "\t${2}\n\tres.send()",
+      "})"
+    ],
+    "description": "Create a new update route"
   }
+}
