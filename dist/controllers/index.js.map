@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/controllers/index.ts"],"names":[],"mappings":";;AAAA,iCAAkD;AAClD,6BAA4C;AAE5C,kBAAe;IACX,IAAI,uBAAK,EAAE;IACX,IAAI,mBAAG,EAAE;CACZ,CAAA","sourcesContent":["import { HelloController as Hello } from './hello'\nimport { ByeController as Bye } from './bye'\n\nexport default [\n    new Hello(),\n    new Bye()\n]"]}
