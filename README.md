@@ -12,3 +12,8 @@ Use:
 > git checkout development
 ```
 Use this command to switch to development branch
+
+### 2. Working with the project
+- Controller generation
+The repo contains a code snippet under the words of "routeController" which generates a new template for the route.
+NOTE: It requires a Project Snippets VS Code extension by Peng Lv

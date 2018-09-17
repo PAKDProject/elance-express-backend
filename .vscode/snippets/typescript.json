@@ -1,0 +1,24 @@
+{
+    "createController": {
+      "prefix": "routeController",
+      "body": [
+        "import { Router, Response, Request } from 'express'",
+        "import { BaseRouter } from '../lib/baseRouter'",
+        "",
+        "export class ${1}Controller implements BaseRouter {",
+        "\tbasePath: string = '/${2}'",
+        "",
+        "\tconstructor() {",
+        "\n\t}",
+        "",
+        "\treturnRouter() : Router {",
+        "\t\treturn Router()",
+        "\t\t.get('${3}', (req: Request, res: Response) => {",
+        "\t\t\tres.send()",
+        "\t\t})",
+        "\t}",
+        "}"
+      ],
+      "description": "Create a new controller"
+    }
+  }
