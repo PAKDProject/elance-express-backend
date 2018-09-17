@@ -33,10 +33,9 @@ export class Server {
     }
 
     /**
-     * routes() - sets up routes for the server
+     * Sets up routes for the server
      * @returns Express Router filled with all routes
      */
-
      private routes() : express.Router { 
          let router = express.Router()
 
