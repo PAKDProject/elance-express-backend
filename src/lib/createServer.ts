@@ -1,7 +1,7 @@
 import * as express from 'express'
 import * as cors from 'cors'
 import { json } from 'body-parser'
-import { default as routes } from './controllers/'
+import { default as routes } from '../controllers'
 
 const environment: any = process.env.NODE_ENV
 

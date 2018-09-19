@@ -1,4 +1,4 @@
-import { Server } from '../server'
+import { Server } from '../lib/createServer'
 
 let app = new Server(3001)
 

@@ -1,5 +1,5 @@
 import { Router, Response, Request } from 'express'
-import { BaseRouter } from '../lib/baseRouter'
+import { BaseRouter } from '../interfaces/baseRouter'
 
 /**
 * @class ByeController used to control bye route
