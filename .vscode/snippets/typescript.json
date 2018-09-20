@@ -3,7 +3,7 @@
     "prefix": "routeController",
     "body": [
       "import { Router, Response, Request } from 'express'",
-      "import { BaseRouter } from '../lib/baseRouter'",
+      "import { BaseRouter } from '../interfaces/baseRouter'",
       "",
       "/**",
       "* @class ${1}Controller used to control ${2} route",
@@ -69,5 +69,21 @@
       "})"
     ],
     "description": "Create a new update route"
+  },
+  "mongoModel" : {
+    "prefix": "mongoModel",
+    "body": [
+      "import { Typegoose, prop, ModelType, staticMethod } from 'Typegoose'\n",
+      "/**",
+      "* Model class for ${1}\n* @extends Typegoose",
+      "*/",
+      "export class ${1} extends Typegoose {",
+      "\t@prop()",
+      "\tname?: string",
+      "\n\t/**\n\t* Default method for finding all ${1}s\n\t* @param this - context\n\t*/\n\t@staticMethod\n\tstatic async findAll${1}s(this: ModelType<${1}>) {\n\t\treturn await this.find({})\n\t}",
+      "}\n",
+      "export let ${1}Model = new ${1}().getModelForClass(${1})"
+    ],
+    "description": "Create a new model class"
   }
 }
