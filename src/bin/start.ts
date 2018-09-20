@@ -1,9 +1,13 @@
 import { Server } from '../lib/createServer'
+import { UserModel } from '../models/user';
+import { error, info } from '../../helpers/logger'
 
-let app = new Server(3001)
-
-try {
-    app.start()
-} catch (error) {
-    console.log(error)
-}
+(async () => {
+    try {
+        let app = new Server(3001)
+        await app.config()
+        app.start()
+    } catch (err) {
+        error(err)
+    }
+})()
