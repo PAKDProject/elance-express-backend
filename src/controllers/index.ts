@@ -1,7 +1,5 @@
-import { HelloController as Hello } from './hello'
-import { ByeController as Bye } from './bye'
+import { UserController as User } from "./user";
 
 export default [
-    new Hello(),
-    new Bye()
+    new User()
 ]
