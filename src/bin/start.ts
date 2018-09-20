@@ -1,6 +1,5 @@
 import { Server } from '../lib/createServer'
-import { UserModel } from '../models/user';
-import { error, info } from '../../helpers/logger'
+import { error } from '../../helpers/logger'
 
 (async () => {
     try {
