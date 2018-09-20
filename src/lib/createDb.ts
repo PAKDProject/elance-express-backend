@@ -5,8 +5,8 @@ export class MongoDb {
     private _mongoUrl: string
 
     constructor() {
-        this._mongoUrl = getConfig("db.url")
-        // this._mongoUrl = 'mongodb://elance:testing1234@ds163182.mlab.com:63182/app-elance-site'
+        // this._mongoUrl = getConfig("db.url")
+        this._mongoUrl = 'mongodb://elance:testing1234@ds163182.mlab.com:63182/app-elance-site'
     }
 
     async setup() : Promise<any> {

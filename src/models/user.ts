@@ -1,4 +1,5 @@
 import { Typegoose, prop, ModelType, staticMethod } from 'Typegoose'
+import { ObjectId } from 'mongodb';
 
 /**
 * Model class for User
@@ -21,9 +22,17 @@ export class User extends Typegoose {
         return await this.find({})
     }
 
+    // Find a user based on the name given
     @staticMethod
     static async findUserByName(this: ModelType<User>, name: string) {
         return await this.findOne({name: name})
+    }
+
+    // Find a user based on the ID given
+    @staticMethod
+    static async findUserById(this: ModelType<User>, id: string) {
+        let o_id = new ObjectId(id)
+        return await this.findOne({_id: o_id})
     }
 }
 
