@@ -36,6 +36,20 @@ export class UserController implements BaseRouter {
 
                 })()
             })
+            .get('/:name/', (req: Request, res: Response) => {
+                (async () => {
+                    try {
+                        let params = {
+                            name: req.params.name
+                        }
+                        let userFound = await UserModel.findUserByName(params.name)
+                        if(!userFound) res.status(404).send("User not found")
+                        else res.send(userFound)
+                    } catch (error) {
+                        res.status(404).send('Error finding specified user: ' + error)
+                    }
+                })()
+            })
             .post('/:name/', (req: Request, res: Response) => {
                 (async () => {
                     try {
