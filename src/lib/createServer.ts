@@ -13,6 +13,7 @@ const environment: any = process.env.NODE_ENV
 export class Server {
     app: express.Application = express()
     port: Number
+    configured: boolean = false
 
     /**
      * Create new Express Server
@@ -35,11 +36,12 @@ export class Server {
             info('1. Setting up mongo...')
             await new MongoDb().setup()
             success('Mongodb connection established!')
-            
+
             info('2. Setting up routes...')
             let routes = this.routes()
             this.app.use('/', routes)
             success('Routes setup complete!')
+            this.configured = true;
         } catch (error) {
             throw new Error(error)
         }
@@ -65,11 +67,16 @@ export class Server {
      */
     start(): void {
         info('Server starting...')
-        this.app.listen(this.port, (err: Error) => {
-            if (err && environment != "production")
-                throw new Error(err.message)
-            else
-                success(`Server running on port ${this.port}. Current Environment: ${environment}`)
-        })
+        if (this.configured) {
+            this.app.listen(this.port, (err: Error) => {
+                if (err && environment != "production")
+                    throw new Error(err.message)
+                else
+                    success(`Server running on port ${this.port}. Current Environment: ${environment}`)
+            })
+        }
+        else {
+            throw new Error("Server not configured! Run new Server().config() first!")
+        }
     }
 }
