@@ -3,7 +3,7 @@ import * as cors from 'cors'
 import { json } from 'body-parser'
 import { default as routes } from '../controllers'
 import { MongoDb } from './createDb'
-import { info, success } from '../../helpers/logger';
+import { info, success } from '../helpers/logger';
 
 const environment: any = process.env.NODE_ENV
 
