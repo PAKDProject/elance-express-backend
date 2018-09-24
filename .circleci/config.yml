@@ -20,15 +20,13 @@ jobs:
           root: ./
           paths:
             - .
-
-    
-    test:
-      docker:
-        - image: circleci/node:10
-      steps:
-        - attach_workspace:
-            at: ./
-        - run:
+  test:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
           name: Run test-dev
           command: 'sudo npm run test:dev'
         
