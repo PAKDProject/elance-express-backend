@@ -56,6 +56,9 @@ jobs:
       - attach_workspace:
           at: ./
       - run:
+          name: Add github as known_host
+          command: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+      - run:
           name: Add git config
           command: git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
       - run:
