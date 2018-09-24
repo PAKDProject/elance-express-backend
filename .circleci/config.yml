@@ -1,4 +1,6 @@
 version: 2
+defaults:
+  working_directory: ~/repo
 jobs:
   build:
     docker:
