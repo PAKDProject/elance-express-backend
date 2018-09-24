@@ -69,11 +69,11 @@ jobs:
             fi
             ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - run:
-          name: Add git config
-          command: sudo git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
-      - run:
           name: Switch to master branch
           command: git checkout master
+      - run:
+          name: Add git config
+          command: git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
       - run: 
           name: Pull master branch
           command: git pull origin master
