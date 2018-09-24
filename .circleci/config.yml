@@ -58,6 +58,9 @@ jobs:
       - run:
           name: Add github as known_host
           command: |
+            if [[ ! -d ~/.ssh ]]; then
+              mkdir ~/.ssh
+            fi
             if [[ ! -f ~/.ssh/known_hosts ]]; then
               touch ~/.ssh/known_hosts
             fi
