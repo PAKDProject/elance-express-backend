@@ -31,7 +31,7 @@ export class Login extends Typegoose {
     * @param username - username for the person
     */
     @staticMethod
-    static async findByUsername(this: ModelType<Login>, username: string) {
+    static async findLoginByUsername(this: ModelType<Login>, username: string) {
         return await this.find({username: username})
     }
 
