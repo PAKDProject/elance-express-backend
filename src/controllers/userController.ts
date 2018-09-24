@@ -30,15 +30,60 @@ export class UserController implements BaseRouter {
                 let users = await UserModel.findAllUsers()
                 if (users.length === 0) res.status(404).send('No users found')
                 else res.send(users)
-            })
-            )
-            .post('/:name/', asyncRoutes(async (req: Request, res: Response, next: NextFunction) => {
-                let params = {
-                    name: req.params.name
-                }
-                let user = new UserModel(new User(params.name))
-                await user.save()
-                res.status(201).send(`User ${user.name} is saved`)
             }))
+            .get('/', (req: Request, res: Response) => {
+                (async () => {
+                    try {
+                        let users = await UserModel.findAllUsers()
+                        if(users.length === 0) res.status(404).send('No users found')
+                        else res.send(users)
+                    } catch (error) {
+                        res.status(404).send('Error finding users: ' + error )
+                    }
+
+                })()
+            })
+            .get('/name/:name/', (req: Request, res: Response) => {
+                (async () => {
+                    try {
+                        let params = {
+                            name: req.params.name
+                        }
+                        let userFound = await UserModel.findUserByName(params.name)
+                        if(!userFound) res.status(404).send("User not found")
+                        else res.send(userFound)
+                    } catch (error) {
+                        res.status(404).send('Error finding specified user: ' + error)
+                    }
+                })()
+            })
+            .get('/id/:id/', (req: Request, res: Response) => {
+                (async () => {
+                    try {
+                        let params = {
+                            id: req.params.id
+                        }
+                        let userFound = await UserModel.findUserById(params.id)
+                        if(!userFound) res.status(404).send("User not found")
+                        else res.send(userFound)
+                    } catch (error) {
+                        res.status(404).send('Error finding specified user: ' + error)
+                    }
+                })()
+            })
+            .post('/:name/', (req: Request, res: Response) => {
+                (async () => {
+                    try {
+                        let params = {
+                            name: req.params.name
+                        }
+                        let user = new UserModel(new User(params.name))
+                        await user.save()
+                        res.status(201).send(`User ${user.name} is saved`)
+                    } catch (error) {
+                        res.status(404).send('Error when creating user: ' + JSON.stringify(error))
+                    }          
+                })()
+            })
     }
 }

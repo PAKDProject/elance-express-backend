@@ -5,8 +5,7 @@ export class MongoDb {
     private _mongoUrl: string
 
     constructor() {
-        // this._mongoUrl = getConfig("dbUrl")
-        this._mongoUrl = "mongodb://localhost:27017/elance"; // Just a wee local db for tests
+        this._mongoUrl = getConfig("db.url")
     }
 
     async setup() : Promise<any> {
