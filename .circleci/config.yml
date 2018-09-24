@@ -74,6 +74,9 @@ jobs:
       - run:
           name: Switch to master branch
           command: git checkout master
+      - run: 
+          name: debugging
+          command: ls -lt && cd dist && ls -lt 
       - run:
           name: Merge without commit
           command: git merge --no-commit development
@@ -85,6 +88,9 @@ jobs:
                 git reset $file
               fi
             done
+      - run: 
+          name: debugging
+          command: ls -lt && cd dist && ls -lt 
       - run: 
           name: Commit fixed changes
           command: git commit -m "merged from dev"
