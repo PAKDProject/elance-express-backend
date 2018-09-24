@@ -5,8 +5,8 @@
   "main": "dist/bin/start.js",
   "scripts": {
     "test": "mocha",
-    "start": "set NODE_ENV=production && node dist/bin/start.js",
-    "start:dev": "set NODE_ENV=development && ts-node src/bin/start.ts",
+    "start": "export NODE_ENV=production && node dist/bin/start.js",
+    "start:dev": "export NODE_ENV=development && ts-node src/bin/start.ts",
     "build": "tsc"
   },
   "repository": {
