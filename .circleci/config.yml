@@ -55,6 +55,9 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
+      - run: 
+          name: debugging
+          command: ls -lt && cd dist && ls -lt 
       - run:
           name: Add github as known_host
           command: |
@@ -78,7 +81,7 @@ jobs:
           name: Ignore all unecessary files
           command: |
             for file in *; do
-              if [[ $file != "dist" && $file != "config" && $file != "./package.json" ]]; then
+              if [[ $file != "dist" && $file != "config" && $file != "package.json" ]]; then
                 git reset $file
               fi
             done
