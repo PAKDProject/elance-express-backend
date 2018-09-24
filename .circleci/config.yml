@@ -74,9 +74,9 @@ jobs:
       - run:
           name: Switch to master branch
           command: git checkout master
-      # - run: 
-      #     name: debugging
-      #     command: ls -lt && cd dist && ls -lt 
+      - run: 
+          name: debugging
+          command: ls -lt && cd dist && ls -lt 
       # - run:
       #     name: Merge without commit
       #     command: git merge --no-commit development
