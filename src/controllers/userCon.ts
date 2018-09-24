@@ -1,8 +1,7 @@
-import { Router, Response, Request } from 'express'
+import { Router, Response, Request, NextFunction } from 'express'
 import { BaseRouter } from '../interfaces/baseRouter'
 import { UserModel, User } from '../models/user';
 import { asyncRoutes } from '../middleware/asyncRoutes'
-import { NextFunction } from 'express-serve-static-core';
 
 /**
 * @class UserController used to control user route
