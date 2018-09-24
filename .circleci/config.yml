@@ -12,12 +12,12 @@ jobs:
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           name: Restoring cache
-          key: npm-dependency-cache-{{ checksum "package.json "}} 
+          key: npm-dependency-cache
       - run:
           name: Install node_modules
           command: 'sudo npm install'
       - save_cache:
-          key: npm-dependency-cache-{{ checksum "package.json "}} 
+          key: npm-dependency-cache
           paths:
             - node_modules
   test:
@@ -27,7 +27,7 @@ jobs:
       - checkout
       - restore_cache:
           name: Restoring npm modules
-          key: npm-dependency-cache-{{ checksum "package.json "}} 
+          key: npm-dependency-cache
       - run:
           name: Run test-dev
           command: 'sudo npm run test:dev'
@@ -38,7 +38,7 @@ jobs:
         - checkout
         - restore_cache:
             name: Restoring npm modules
-            key: npm-dependency-cache-{{ checksum "package.json "}} 
+            key: npm-dependency-cache
         - run:
             name: Run typescript build
             command: 'sudo npm run build'
