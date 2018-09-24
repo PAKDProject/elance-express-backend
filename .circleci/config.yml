@@ -93,7 +93,7 @@ jobs:
       #     command: ls -lt && cd dist && ls -lt 
       - run:
           name: Add changes to commit
-          command: git add dist && git add package.json && git add package-lock.json
+          command: git add dist -f && git add package.json && git add package-lock.json
       - run: 
           name: Commit fixed changes
           command: git commit -m "merged from dev"
