@@ -57,7 +57,7 @@ jobs:
           at: ./
       - run:
           name: Run git push to master
-          command: git add . && git commit -m 'merged from developement' && git push origin master"
+          command: git add . && git commit -m "merged from developement" && git push origin master
         
 workflows:
   version: 2
