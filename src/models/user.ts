@@ -3,10 +3,8 @@ import { ObjectId } from 'mongodb';
 import { Job } from './job';
 
 /**
-* Model class for User
-* @extends Typegoose
-*/
-
+ * Class for Skills
+ */
 export class Skill {
     @prop()
     title?: string
@@ -15,6 +13,9 @@ export class Skill {
     description?: string
 }
 
+/**
+ * Class for Education Items
+ */
 export class EducationItem {
     @prop()
     degreeTitle?: string
@@ -35,6 +36,9 @@ export class EducationItem {
     description?: string
 }
 
+/**
+ * Class for Social Links
+ */
 export class SocialLink {
     @prop()
     name?: string
@@ -43,6 +47,10 @@ export class SocialLink {
     linkUrl?: string
 }
 
+/**
+* Model class for User
+* @extends Typegoose
+*/
 export class User extends Typegoose {
     @prop()
     username?: string
