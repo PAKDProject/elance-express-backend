@@ -24,7 +24,10 @@ export class Job extends Typegoose {
     @prop()
     employerID?: ObjectId
 
-    constructor(title?: string, payment?: number, description?: string, startDate?: Date, dueDate?: Date, employeeID?: ObjectId) {
+    @prop()
+    progress?: number
+
+    constructor(title?: string, payment?: number, description?: string, startDate?: Date, dueDate?: Date, employeeID?: ObjectId, progress?: number) {
         super()
         this.title = title
         this.payment = payment
@@ -32,6 +35,7 @@ export class Job extends Typegoose {
         this.startDate = startDate
         this.dueDate = dueDate
         this.employerID = employeeID
+        this.progress = progress
     }
     /**
     * Default method for finding all Jobs
