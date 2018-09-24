@@ -6,22 +6,22 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Update npm
-        command: 'sudo npm install -g npm@latest'
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
       - restore_cache:
-        name: Restoring cache
-        key: dependency-cache-{{ checksum "package.json" }}
+          name: Restoring cache
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
-        name: Install node_modules
-        command: 'sudo npm install'
+          name: Install node_modules
+          command: 'sudo npm install'
   test:
     docker:
       - image: circleci/node:10.11-stretch-browsers-legacy
     steps:
       - checkout
       - run:
-        name: Run test-dev
-        command: 'sudo npm run test:dev'
+         name: Run test-dev
+         command: 'sudo npm run test:dev'
 
 workflows:
   version: 2
@@ -29,8 +29,8 @@ workflows:
     jobs:
       - build
       - test:
-        requires:
-          - build
-        filters: 
-          branches: 
+          requires:
+            - build
+          filters: 
+            branches: 
             only: development
