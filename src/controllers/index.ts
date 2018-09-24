@@ -1,8 +1,10 @@
-import { TestController as Test } from "./testController"
-import { UserController as User } from "./userController";
+import { TestController as Test } from "./testCon"
+import { UserController as User } from "./userCon"
+import { LoginController as Login, LoginController } from "./loginCon"
 
 // All backend routes listed below
 export default [
     new Test(),
-    new User()
+    new User(),
+    new LoginController()
 ]
