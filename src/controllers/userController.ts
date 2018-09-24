@@ -1,6 +1,8 @@
 import { Router, Response, Request } from 'express'
 import { BaseRouter } from '../interfaces/baseRouter'
 import { UserModel, User } from '../models/user';
+import { asyncRoutes } from '../middleware/asyncRoutes'
+import { NextFunction } from 'express-serve-static-core';
 
 /**
 * @class UserController used to control user route
@@ -24,31 +26,19 @@ export class UserController implements BaseRouter {
     */
     returnRouter(): Router {
         return Router()
-            .get('/', (req: Request, res: Response) => {
-                (async () => {
-                    try {
-                        let users = await UserModel.findAllUsers()
-                        if(users.length === 0) res.status(404).send('No users found')
-                        else res.send(users)
-                    } catch (error) {
-                        res.status(404).send('Error finding users: ' + error )
-                    }
-
-                })()
+            .get('/', asyncRoutes(async (req: Request, res: Response, next: NextFunction) => {
+                let users = await UserModel.findAllUsers()
+                if (users.length === 0) res.status(404).send('No users found')
+                else res.send(users)
             })
-            .post('/:name/', (req: Request, res: Response) => {
-                (async () => {
-                    try {
-                        let params = {
-                            name: req.params.name
-                        }
-                        let user = new UserModel(new User(params.name))
-                        await user.save()
-                        res.status(201).send(`User ${user.name} is saved`)
-                    } catch (error) {
-                        res.status(404).send('Error when creating user: ' + JSON.stringify(error))
-                    }          
-                })()
-            })
+            )
+            .post('/:name/', asyncRoutes(async (req: Request, res: Response, next: NextFunction) => {
+                let params = {
+                    name: req.params.name
+                }
+                let user = new UserModel(new User(params.name))
+                await user.save()
+                res.status(201).send(`User ${user.name} is saved`)
+            }))
     }
 }
