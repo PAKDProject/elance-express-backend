@@ -29,10 +29,6 @@ jobs:
       - run:
           name: Run test-dev
           command: 'sudo npm run test:dev'
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - .
   transpile:
       docker:
         - image: circleci/node:10
@@ -46,9 +42,6 @@ jobs:
             root: ./
             paths:
               - dist
-              - "package.json"
-              - "package-lock.json"
-              - .git
   merge_to_master:
     docker:
       - image: circleci/node:10
