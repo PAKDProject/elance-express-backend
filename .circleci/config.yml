@@ -74,9 +74,6 @@ jobs:
       - run:
           name: Add git config
           command: git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
-      - run: 
-          name: Pull master branch
-          command: git pull origin master
       - run:
           name: Merge without commit
           command: git merge --no-commit development
