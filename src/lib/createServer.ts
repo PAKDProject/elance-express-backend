@@ -5,8 +5,6 @@ import { default as routes } from '../controllers'
 import { MongoDb } from './createDb'
 import { info, success, secret } from '../helpers/logger';
 
-const environment: any = process.env.NODE_ENV
-
 /**
  * @class Server class which bootstraps the server
  */
@@ -14,13 +12,15 @@ export class Server {
     app: express.Application = express()
     port: Number
     configured: boolean = false
+    environment: any
 
     /**
      * Create new Express Server
      * @param port - port number, optional (default = 3000)
      */
-    constructor(port?: Number) {
-        (port) ? this.port = port : this.port = 3000
+    constructor(port?: Number, environment?: any) {
+        (port) ? this.port = port : this.port = 3000;
+        (environment) ? this.environment = environment : this.environment = process.env.NODE_ENV;
     }
 
     /**
@@ -71,10 +71,10 @@ export class Server {
         info('Server starting...')
         if (this.configured) {
             this.app.listen(this.port, (err: Error) => {
-                if (err && environment != "production")
+                if (err && this.environment != "production")
                     throw new Error(err.message)
                 else
-                    success(`Server running on port ${this.port}. Current Environment: ${environment}`)
+                    success(`Server running on port ${this.port}. Current Environment: ${this.environment}`)
             })
         }
         else {
