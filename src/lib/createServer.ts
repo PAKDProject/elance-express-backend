@@ -3,7 +3,9 @@ import * as cors from 'cors'
 import { json } from 'body-parser'
 import { default as routes } from '../controllers'
 import { MongoDb } from './createDb'
-import { info, success, secret } from '../helpers/logger';
+import { info, success } from '../helpers/logger';
+import { errorLogger } from '../middleware/errorLogger';
+import { errorHandler } from '../middleware/errorHandler';
 
 /**
  * @class Server class which bootstraps the server
@@ -41,8 +43,16 @@ export class Server {
             let routes = this.routes()
             this.app.use('/', routes)
             success('Routes setup complete!')
+
+            info('3. Setting up error logging...')
+            this.app.use(errorLogger)
+            success('Error Logger setup complete!')
+
+            info('4. Setting up error handler...')
+            this.app.use(errorHandler)
+            success('Error handler setup complete!')
+
             success('Server fully configured!')
-            secret('Its L I T fam')
             this.configured = true;
         } catch (error) {
             throw new Error(error)
