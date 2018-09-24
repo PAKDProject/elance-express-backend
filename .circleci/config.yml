@@ -56,6 +56,9 @@ jobs:
       - attach_workspace:
           at: ./
       - run:
+          name: Add git config
+          command: git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
+      - run:
           name: Run git push to master
           command: git add . && git commit -m "merged from developement" && git push origin master
         
