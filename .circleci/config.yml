@@ -46,6 +46,7 @@ jobs:
             root: ./
             paths:
               - dist
+              - config
               - package.json
               - .git
   merge_to_master:
