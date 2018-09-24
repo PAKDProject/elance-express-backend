@@ -1,4 +1,4 @@
-import { Typegoose, prop, ModelType, staticMethod } from 'Typegoose'
+import { Typegoose, prop, ModelType, staticMethod } from 'typegoose'
 import { ObjectId } from 'mongodb'
 
 /**

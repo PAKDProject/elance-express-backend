@@ -1,5 +1,5 @@
-import { Typegoose, prop, ModelType, staticMethod } from 'Typegoose'
-import { ObjectId } from 'mongodb';
+import { Typegoose, prop, ModelType, staticMethod } from 'typegoose'
+import { ObjectId } from 'mongodb'
 
 /**
 * Model class for Login

@@ -1,4 +1,4 @@
-import { Typegoose, prop, ModelType, staticMethod, arrayProp, Ref } from 'Typegoose'
+import { Typegoose, prop, ModelType, staticMethod, arrayProp, Ref } from 'typegoose'
 import { ObjectId } from 'mongodb';
 import { Job } from './job';
 
