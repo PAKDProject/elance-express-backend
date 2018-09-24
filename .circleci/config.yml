@@ -57,7 +57,12 @@ jobs:
           at: ./
       - run:
           name: Add github as known_host
-          command: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+          command: 
+            ->
+              if [[ ! -f ~/.ssh/known_hosts ]]; then
+                touch ~/.ssh/known_hosts
+              fi
+              ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - run:
           name: Add git config
           command: git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
