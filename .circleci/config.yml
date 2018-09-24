@@ -66,9 +66,26 @@ jobs:
           name: Add git config
           command: git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
       - run:
-          name: Run git push to master
-          command: git add . && git commit -m "merged from developement" && git push origin master
-        
+          name: Switch to master branch
+          command: git checkout master
+      - run:
+          name: Merge without commit
+          command: git merge --no-commit development
+      - run:
+          name: Ignore all unecessary files
+          command: |
+            for file in *; do
+              if [[ $file != "dist" && $file != "config" && $file != "./package.json" ]]; then
+                git reset $file
+              fi
+            done
+      - run: 
+          name: Commit fixed changes
+          command: git commit -m "merged from dev"
+      - run: 
+          name: Push changes
+          command: git push origin master
+              
 workflows:
   version: 2
   build_and_test_dev:
