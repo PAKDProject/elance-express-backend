@@ -19,5 +19,3 @@ jobs:
       - run:
          name: Run test-dev
          command: 'sudo npm run test:dev'
-      - store_artifacts:
-          path: /testresult
