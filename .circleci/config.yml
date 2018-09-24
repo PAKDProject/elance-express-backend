@@ -29,6 +29,35 @@ jobs:
       - run:
           name: Run test-dev
           command: 'sudo npm run test:dev'
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - .
+  transpile:
+      docker:
+        - image: circleci/node:10
+      steps:
+        - attach_workspace:
+            at: ./
+        - run:
+            name: Run typescript build
+            command: 'sudo npm run build'
+        - persist_to_workspace:
+            root: ./
+            paths:
+              - dist
+              - "package.json"
+              - "package-lock.json"
+              - .git
+  merge_to_master:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Run git push to master
+          command: git add . && git commit -m 'merged from developement' && git push origin master"
         
 workflows:
   version: 2
@@ -38,3 +67,9 @@ workflows:
       - test:
           requires:
             - build
+      - transpile:
+          requires:
+            - test
+      - merge_to_master:
+          requires:
+            - transpile
