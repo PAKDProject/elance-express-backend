@@ -82,27 +82,7 @@ jobs:
             git add .
             git commit --allow-empty -m "merged from dev -q"
             git push -q origin master
-      # - run:
-      #     name: Add changed files
-      #     command: cd backend && git add .
-      # # - run:
-      # #     name: Ignore all unecessary files
-      # #     command: |
-      # #       for file in *; do
-      # #         if [[ $file != "dist" && $file != "config" && $file != "package.json" ]]; then
-      # #           git reset $file
-      # #         fi
-      # #       done
-      # # - run:
-      # #     name: Add changes to commit
-      # #     command: git add dist -f && git add package.json && git add package-lock.json
-      # - run: 
-      #     name: Commit fixed changes
-      #     command: cd backend && git commit -m "merged from dev"
-      # - run: 
-      #     name: Push changes
-      #     command: cd backend && git push -q https://www.github.com/pakdproject/linkedout-backend.git master
-              
+                  
 workflows:
   version: 2
   build_and_test_dev:
