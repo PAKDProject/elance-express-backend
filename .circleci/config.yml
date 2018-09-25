@@ -54,6 +54,9 @@ jobs:
       - image: circleci/node:10
     steps:
       - run:
+          name: Update git
+          command: sudo apt install git
+      - run:
           name: Add github as known_host
           command: |
             if [[ ! -d ~/.ssh ]]; then
