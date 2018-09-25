@@ -80,7 +80,7 @@ jobs:
             git config --global user.email "ali9427@windowslive.com"
             git config --global user.name "alanj1998" &&  git config --global credential.helper cache
             git checkout master
-            git reset .gitignore --hard
+            git reset .gitignore
             git pull
             git remote set-url origin https://alanj1998:$DEPLOY_GIT_TOKEN@github.com/pakdproject/linkedout-backend.git
             git add .
