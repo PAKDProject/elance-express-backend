@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Clone ansible and run in stage mode
           command: |
-            git clone https://alanj1998:$DEPLOY_GIT_TOKEN@github.com/pakdproject/linkedout-infrastructure.git ansible
+            git clone https://alanj1998:$DEPLOY_GIT_TOKEN@github.com/pakdproject/linkedout-infrastructure-deployment.git ansible
             cd ansible
             echo $VAULT_PASS > vault.txt
             echo $PRIV_KEY > pass.pem
