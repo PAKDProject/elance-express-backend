@@ -1,5 +1,5 @@
 /// <reference types="mongoose" />
-import { Typegoose, ModelType, Ref } from 'Typegoose';
+import { Typegoose, ModelType, Ref } from 'typegoose';
 import { Job } from './job';
 /**
  * Class for Skills
@@ -50,8 +50,8 @@ export declare class User extends Typegoose {
     * Default method for finding all Users
     * @param this - context
     */
-    static findAllUsers(this: ModelType<User>): Promise<import("Typegoose").InstanceType<User>[]>;
-    static findUserByName(this: ModelType<User>, name: string): Promise<import("Typegoose").InstanceType<User> | null>;
-    static findUserById(this: ModelType<User>, id: string): Promise<import("Typegoose").InstanceType<User> | null>;
+    static findAllUsers(this: ModelType<User>): Promise<import("typegoose").InstanceType<User>[]>;
+    static findUserByName(this: ModelType<User>, name: string): Promise<import("typegoose").InstanceType<User> | null>;
+    static findUserById(this: ModelType<User>, id: string): Promise<import("typegoose").InstanceType<User> | null>;
 }
-export declare const UserModel: import("mongoose").Model<import("Typegoose").InstanceType<User>> & User & typeof User;
+export declare const UserModel: import("mongoose").Model<import("typegoose").InstanceType<User>> & User & typeof User;

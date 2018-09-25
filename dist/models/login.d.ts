@@ -1,5 +1,5 @@
 /// <reference types="mongoose" />
-import { Typegoose, ModelType } from 'Typegoose';
+import { Typegoose, ModelType } from 'typegoose';
 import { ObjectId } from 'mongodb';
 /**
 * Model class for Login
@@ -16,7 +16,7 @@ export declare class Login extends Typegoose {
     * @param this - context
     * @param username - username for the person
     */
-    static findLoginByUsername(this: ModelType<Login>, username: string): Promise<import("Typegoose").InstanceType<Login>[]>;
+    static findLoginByUsername(this: ModelType<Login>, username: string): Promise<import("typegoose").InstanceType<Login>[]>;
     /**
      * Adding new login details
      * @param this - context
@@ -24,6 +24,6 @@ export declare class Login extends Typegoose {
      * @param encryptedPassword - password which is encrypted by hash
      * @param userId - userId to correlate user with login details
      */
-    static addNewLogin(this: ModelType<Login>, username: string, encryptedPassword: string, userId: ObjectId): Promise<import("Typegoose").InstanceType<Login>>;
+    static addNewLogin(this: ModelType<Login>, username: string, encryptedPassword: string, userId: ObjectId): Promise<import("typegoose").InstanceType<Login>>;
 }
-export declare let LoginModel: import("mongoose").Model<import("Typegoose").InstanceType<Login>> & Login & typeof Login;
+export declare let LoginModel: import("mongoose").Model<import("typegoose").InstanceType<Login>> & Login & typeof Login;

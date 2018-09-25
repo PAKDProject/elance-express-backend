@@ -1,4 +1,5 @@
-import { HelloController as Hello } from './hello';
-import { ByeController as Bye } from './bye';
-declare const _default: (Hello | Bye)[];
+import { TestController as Test } from "./testCon";
+import { UserController as User } from "./userCon";
+import { LoginController as Login } from "./loginCon";
+declare const _default: (Test | User | Login)[];
 export default _default;

@@ -17,13 +17,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Typegoose_1 = require("Typegoose");
+const typegoose_1 = require("typegoose");
 const mongodb_1 = require("mongodb");
 /**
 * Model class for Login
 * @extends Typegoose
 */
-class Login extends Typegoose_1.Typegoose {
+class Login extends typegoose_1.Typegoose {
     constructor(username, password, userId) {
         super();
         this.username = username;
@@ -54,29 +54,29 @@ class Login extends Typegoose_1.Typegoose {
     }
 }
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], Login.prototype, "username", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], Login.prototype, "password", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", Number)
 ], Login.prototype, "failedLogins", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", mongodb_1.ObjectId)
 ], Login.prototype, "userId", void 0);
 __decorate([
-    Typegoose_1.staticMethod,
+    typegoose_1.staticMethod,
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], Login, "findLoginByUsername", null);
 __decorate([
-    Typegoose_1.staticMethod,
+    typegoose_1.staticMethod,
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, mongodb_1.ObjectId]),
     __metadata("design:returntype", Promise)

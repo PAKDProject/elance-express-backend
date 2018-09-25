@@ -1,9 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var hello_1 = require("./hello");
-var bye_1 = require("./bye");
+const testCon_1 = require("./testCon");
+const userCon_1 = require("./userCon");
+const loginCon_1 = require("./loginCon");
+// All backend routes listed below
 exports.default = [
-    new hello_1.HelloController(),
-    new bye_1.ByeController()
+    new testCon_1.TestController(),
+    new userCon_1.UserController(),
+    new loginCon_1.LoginController()
 ];
 //# sourceMappingURL=index.js.map

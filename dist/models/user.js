@@ -17,7 +17,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Typegoose_1 = require("Typegoose");
+const typegoose_1 = require("typegoose");
 const mongodb_1 = require("mongodb");
 const job_1 = require("./job");
 /**
@@ -26,11 +26,11 @@ const job_1 = require("./job");
 class Skill {
 }
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], Skill.prototype, "title", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], Skill.prototype, "description", void 0);
 exports.Skill = Skill;
@@ -40,27 +40,27 @@ exports.Skill = Skill;
 class EducationItem {
 }
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], EducationItem.prototype, "degreeTitle", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", Date)
 ], EducationItem.prototype, "startYear", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", Date)
 ], EducationItem.prototype, "endYear", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], EducationItem.prototype, "collegeName", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], EducationItem.prototype, "grade", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], EducationItem.prototype, "description", void 0);
 exports.EducationItem = EducationItem;
@@ -70,11 +70,11 @@ exports.EducationItem = EducationItem;
 class SocialLink {
 }
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], SocialLink.prototype, "name", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], SocialLink.prototype, "linkUrl", void 0);
 exports.SocialLink = SocialLink;
@@ -82,7 +82,7 @@ exports.SocialLink = SocialLink;
 * Model class for User
 * @extends Typegoose
 */
-class User extends Typegoose_1.Typegoose {
+class User extends typegoose_1.Typegoose {
     constructor(username, fName, lName, dob, summary, skills, educationItems, activeJobs, jobHistory, avatarUrl, backgroundUrl, socialLinks, tagline, contacts) {
         super();
         this.username = username;
@@ -124,75 +124,75 @@ class User extends Typegoose_1.Typegoose {
     }
 }
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], User.prototype, "username", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], User.prototype, "fName", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], User.prototype, "lName", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", Date)
 ], User.prototype, "dob", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], User.prototype, "summary", void 0);
 __decorate([
-    Typegoose_1.arrayProp({ items: Skill }),
+    typegoose_1.arrayProp({ items: Skill }),
     __metadata("design:type", Array)
 ], User.prototype, "skills", void 0);
 __decorate([
-    Typegoose_1.arrayProp({ items: EducationItem }),
+    typegoose_1.arrayProp({ items: EducationItem }),
     __metadata("design:type", Array)
 ], User.prototype, "educationItems", void 0);
 __decorate([
-    Typegoose_1.arrayProp({ itemsRef: job_1.Job }),
+    typegoose_1.arrayProp({ itemsRef: job_1.Job }),
     __metadata("design:type", Array)
 ], User.prototype, "activeJobs", void 0);
 __decorate([
-    Typegoose_1.arrayProp({ itemsRef: job_1.Job }),
+    typegoose_1.arrayProp({ itemsRef: job_1.Job }),
     __metadata("design:type", Array)
 ], User.prototype, "jobHistory", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], User.prototype, "avatarUrl", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], User.prototype, "backgroundUrl", void 0);
 __decorate([
-    Typegoose_1.arrayProp({ items: SocialLink }),
+    typegoose_1.arrayProp({ items: SocialLink }),
     __metadata("design:type", Array)
 ], User.prototype, "socialLinks", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], User.prototype, "tagline", void 0);
 __decorate([
-    Typegoose_1.arrayProp({ itemsRef: User }),
+    typegoose_1.arrayProp({ itemsRef: User }),
     __metadata("design:type", Array)
 ], User.prototype, "contacts", void 0);
 __decorate([
-    Typegoose_1.staticMethod,
+    typegoose_1.staticMethod,
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], User, "findAllUsers", null);
 __decorate([
-    Typegoose_1.staticMethod,
+    typegoose_1.staticMethod,
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], User, "findUserByName", null);
 __decorate([
-    Typegoose_1.staticMethod,
+    typegoose_1.staticMethod,
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)

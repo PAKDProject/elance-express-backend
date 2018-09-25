@@ -17,13 +17,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Typegoose_1 = require("Typegoose");
+const typegoose_1 = require("typegoose");
 const mongodb_1 = require("mongodb");
 /**
 * Model class for Job
 * @extends Typegoose
 */
-class Job extends Typegoose_1.Typegoose {
+class Job extends typegoose_1.Typegoose {
     constructor(title, payment, description, startDate, dueDate, employeeID, progress) {
         super();
         this.title = title;
@@ -55,41 +55,41 @@ class Job extends Typegoose_1.Typegoose {
     }
 }
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], Job.prototype, "title", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", Number)
 ], Job.prototype, "payment", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", String)
 ], Job.prototype, "description", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", Date)
 ], Job.prototype, "startDate", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", Date)
 ], Job.prototype, "dueDate", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", mongodb_1.ObjectId)
 ], Job.prototype, "employerID", void 0);
 __decorate([
-    Typegoose_1.prop(),
+    typegoose_1.prop(),
     __metadata("design:type", Number)
 ], Job.prototype, "progress", void 0);
 __decorate([
-    Typegoose_1.staticMethod,
+    typegoose_1.staticMethod,
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], Job, "findAllJobs", null);
 __decorate([
-    Typegoose_1.staticMethod,
+    typegoose_1.staticMethod,
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
