@@ -73,7 +73,7 @@ jobs:
           at: ./backend
       - run:
           name: Add git config
-          command: cd backend && git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
+          command: cd backend && git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998" &&  git config --global credential.helper cache
       - run:
           name: Add changed files
           command: cd backend && git add .
