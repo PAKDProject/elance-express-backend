@@ -90,6 +90,8 @@ describe('Testing the User Controller', () => {
     
     it('Should return all relevant users at /search/:query is used')
 
+    it('Should delete the user at /:id when ID is passed')
+
     after(() => {
         process.exit(0)
     })
