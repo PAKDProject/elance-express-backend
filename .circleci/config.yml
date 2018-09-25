@@ -49,6 +49,7 @@ jobs:
               - config
               - package.json
               - package-lock.json
+              - .git
   merge_to_master:
     docker:
       - image: circleci/node:10
@@ -93,7 +94,7 @@ jobs:
           command: cd backend && git commit -m "merged from dev"
       - run: 
           name: Push changes
-          command: cd backend && git push -q https://e95f88295dcc32e252f211c9cf5977137efe0043@github.com/pakdproject/linkedout-backend.git master
+          command: cd backend && git push -q https://www.github.com/pakdproject/linkedout-backend.git master
               
 workflows:
   version: 2
