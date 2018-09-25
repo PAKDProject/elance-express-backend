@@ -93,7 +93,7 @@ jobs:
           command: cd backend && git commit -m "merged from dev"
       - run: 
           name: Push changes
-          command: cd backend && git push -q https://alanj1998:dbce6c7a8f25041a33566eab48bda0345cb9bde5@github.com/pakdproject/linkedout-backend.git master
+          command: cd backend && git push -q https://e95f88295dcc32e252f211c9cf5977137efe0043@github.com/pakdproject/linkedout-backend.git master
               
 workflows:
   version: 2
