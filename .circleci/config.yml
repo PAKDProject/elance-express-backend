@@ -118,3 +118,9 @@ workflows:
           requires:
             - transpile
           context: secrets
+    triggers:
+      cron: "0 3 * * *"
+      filters:
+        branches:
+          only: 
+            - development
