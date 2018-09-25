@@ -49,7 +49,6 @@ jobs:
               - config
               - package.json
               - package-lock.json
-              - .git
   merge_to_master:
     docker:
       - image: circleci/node:10
@@ -69,7 +68,7 @@ jobs:
             ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - run:
           name: Clone master branch
-          command: git clone https://www.github.com/pakdproject/linkedout-backend.git backend
+          command: git clone https://www.github.com/pakdproject/linkedout-backend.git -b master backend
       - attach_workspace:
           at: ./backend
       - run:
@@ -94,7 +93,7 @@ jobs:
           command: cd backend && git commit -m "merged from dev"
       - run: 
           name: Push changes
-          command: cd backend && git push origin master
+          command: cd backend && git push -q https://dbce6c7a8f25041a33566eab48bda0345cb9bde5@github.com/pakdproject/linkedout-backend.git master
               
 workflows:
   version: 2
