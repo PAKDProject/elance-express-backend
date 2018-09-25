@@ -31,6 +31,9 @@ jobs:
       - image: circleci/node:10
     steps:
       - run:
+          name: Install ansible
+          command: sudo apt install ansible
+      - run:
           name: Clone ansible and run in stage mode
           command: |
             git clone https://alanj1998:$DEPLOY_GIT_TOKEN@github.com/pakdproject/linkedout-infrastructure-deployment.git ansible
