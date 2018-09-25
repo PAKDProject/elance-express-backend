@@ -33,11 +33,11 @@ export class UserController implements BaseRouter {
             .post('/', asyncRoutes(async (req: Request, res: Response, next: NextFunction) => {
                 let newUser = new UserModel(req.body)
                 newUser.save()
-                res.status(201).send(`User ${newUser.username} has been created.`)
+                res.status(201).json({msg: 'User created.', newUser})
             }))
             .put('/:id', asyncRoutes(async (req: Request, res: Response, next: NextFunction) => {
                 let user = await UserModel.findUserById(req.params.id)
-                Object.assign(user, req.body).save(res.status(202).send('User Updated!'))
+                Object.assign(user, req.body).save(res.status(202).json({msg: 'User updated.', user}))
             }))
     }
 }

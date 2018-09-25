@@ -16,7 +16,7 @@ describe('Testing the User Controller', () => {
         })
     })
 
-    it('Should return user at /:id when id is passed', done => {
+    it('Should return all users', done => {
         chai.request(apiUrl)
         .get('')
         .end((_err, res) => {
@@ -70,6 +70,7 @@ describe('Testing the User Controller', () => {
         .send(user)
         .end((_err, res) => {
             chai.expect(res.status).to.equal(201)
+            chai.expect(res.body).to.have.property('msg').eql('User created.')
             done()
         })
     })
@@ -80,10 +81,13 @@ describe('Testing the User Controller', () => {
             lName: 'Bags'
         }
         chai.request(apiUrl)
-        .put('/' + '5baaa264480dbc1757b7f00f')
+        .put('/' + '5baab09a480dbc1757b7f010')
         .send(userChanges)
         .end((_err, res) => {
             chai.expect(res.status).to.equal(202)
+            chai.expect(res.body).to.have.property('msg').eql('User updated.')
+            chai.expect(res.body.user).to.have.property('fName').eql('Money')
+            chai.expect(res.body.user).to.have.property('lName').eql('Bags')
             done()
         })
     })
