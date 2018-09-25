@@ -83,8 +83,6 @@ jobs:
             git add .
             git commit --allow-empty -m "merged from dev"
             git push -q origin master
-    context:
-      - secrets
       # - run:
       #     name: Add changed files
       #     command: cd backend && git add .
@@ -120,3 +118,4 @@ workflows:
       - merge_to_master:
           requires:
             - transpile
+          context: secrets
