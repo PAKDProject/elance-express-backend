@@ -48,13 +48,11 @@ jobs:
               - dist
               - config
               - package.json
-              - .git
+              - package-lock.json
   merge_to_master:
     docker:
       - image: circleci/node:10
     steps:
-      - attach_workspace:
-          at: ./
       - run: 
           name: debugging
           command: ls -lt && cd dist && ls -lt 
@@ -69,22 +67,24 @@ jobs:
             fi
             ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - run:
-          name: Switch to master branch
-          command: git checkout master
+          name: Clone master branch
+          command: git clone https://github.com/pakdproject/linkedout-backend.git backend
+      - attach_workspace:
+          at: ./backend
       - run:
           name: Add git config
           command: git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
       - run:
-          name: Merge without commit
-          command: git merge --no-commit development
-      - run:
-          name: Ignore all unecessary files
-          command: |
-            for file in *; do
-              if [[ $file != "dist" && $file != "config" && $file != "package.json" ]]; then
-                git reset $file
-              fi
-            done
+          name: Add changed files
+          command: git add .
+      # - run:
+      #     name: Ignore all unecessary files
+      #     command: |
+      #       for file in *; do
+      #         if [[ $file != "dist" && $file != "config" && $file != "package.json" ]]; then
+      #           git reset $file
+      #         fi
+      #       done
       # - run:
       #     name: Add changes to commit
       #     command: git add dist -f && git add package.json && git add package-lock.json
