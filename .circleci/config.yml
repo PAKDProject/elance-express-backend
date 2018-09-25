@@ -68,15 +68,12 @@ jobs:
           command: git clone https://github.com/pakdproject/linkedout-backend.git backend
       - attach_workspace:
           at: ./backend
-      - run: 
-          name: CD into cloned repo
-          command: cd backend
       - run:
           name: Add git config
           command: git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
       - run:
           name: Add changed files
-          command: git add .
+          command: cd backend && git add .
       # - run:
       #     name: Ignore all unecessary files
       #     command: |
@@ -90,10 +87,10 @@ jobs:
       #     command: git add dist -f && git add package.json && git add package-lock.json
       - run: 
           name: Commit fixed changes
-          command: git commit -m "merged from dev"
+          command: cd backend && git commit -m "merged from dev"
       - run: 
           name: Push changes
-          command: git push origin master
+          command: cd backend && git push origin master
               
 workflows:
   version: 2
