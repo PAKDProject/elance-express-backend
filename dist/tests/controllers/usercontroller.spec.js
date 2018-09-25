@@ -1,30 +1,76 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const mocha_1 = require("mocha");
-const chai_1 = require("chai");
+require("mocha");
+const chai = require("chai");
 const createServer_1 = require("../../lib/createServer");
-const node_fetch_1 = require("node-fetch");
-mocha_1.describe('Testing the User Controller', () => {
+const chaiHttp = require("chai-http");
+chai.use(chaiHttp);
+describe('Testing the User Controller', () => {
     const apiUrl = 'http://localhost:3000/user';
-    mocha_1.before(done => {
+    before(done => {
         let app = new createServer_1.Server(undefined, 'development');
         app.config().then(() => {
             app.start();
             done();
         });
     });
-    mocha_1.it('Should return user at /:id when id is passed', done => {
-        node_fetch_1.default(apiUrl + '')
-            .then(users => {
-            chai_1.expect(users).to.not.be.null;
-            chai_1.expect(users.status).to.equal(200);
-            chai_1.expect(users).to.not.be.undefined;
+    it('Should return user at /:id when id is passed', done => {
+        chai.request(apiUrl)
+            .get('')
+            .end((_err, res) => {
+            chai.expect(res).to.not.be.null;
+            chai.expect(res.status).to.equal(200);
+            chai.expect(res).to.not.be.undefined;
             done();
         });
     });
-    mocha_1.it('Should insert a new user at /');
-    mocha_1.it('Should update user at /:id when ID is passed');
-    mocha_1.it('Should return all relevant users at /search/:query is used');
+    it('Should insert a new user at /', done => {
+        const user = {
+            username: 'xXx_JeffBezos_xXx',
+            fName: 'Jeff',
+            lName: 'Bezos',
+            dob: new Date('01/01/01'),
+            summary: 'Ayy its ya boi, skinnybezos',
+            skills: [
+                {
+                    title: 'God King of Earth',
+                    description: 'I have too much money'
+                },
+                {
+                    title: 'Absolutely Shredded',
+                    description: 'gains gains gains'
+                }
+            ],
+            educationItems: [
+                {
+                    degreeTitle: 'PhD in Being Rich',
+                    startYear: '2017',
+                    endYear: '2999',
+                    collegeName: 'AWS Institute',
+                    grade: '69',
+                    description: 'Why is this a field loool 4Head'
+                }
+            ],
+            avatarUrl: 'bezos.png',
+            backoundUrl: 'background.png',
+            socialLinks: [
+                {
+                    name: 'Github',
+                    linkUrl: 'https://github.com/BlueishLeaf'
+                }
+            ],
+            tagline: 'The real OG'
+        };
+        chai.request(apiUrl)
+            .post('/')
+            .send(user)
+            .end((_err, res) => {
+            chai.expect(res.status).to.equal(201);
+            done();
+        });
+    });
+    it('Should update user at /:id when ID is passed');
+    it('Should return all relevant users at /search/:query is used');
     after(() => {
         process.exit(0);
     });

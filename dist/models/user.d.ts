@@ -13,8 +13,8 @@ export declare class Skill {
  */
 export declare class EducationItem {
     degreeTitle?: string;
-    startYear?: Date;
-    endYear?: Date;
+    startYear?: string;
+    endYear?: string;
     collegeName?: string;
     grade?: string;
     description?: string;
@@ -44,7 +44,7 @@ export declare class User extends Typegoose {
     backgroundUrl?: string;
     socialLinks?: SocialLink[];
     tagline?: string;
-    contacts?: User[];
+    contacts?: Ref<User>[];
     constructor(username?: string, fName?: string, lName?: string, dob?: Date, summary?: string, skills?: Skill[], educationItems?: EducationItem[], activeJobs?: Job[], jobHistory?: Job[], avatarUrl?: string, backgroundUrl?: string, socialLinks?: SocialLink[], tagline?: string, contacts?: User[]);
     /**
     * Default method for finding all Users

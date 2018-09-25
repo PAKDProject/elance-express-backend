@@ -36,6 +36,11 @@ class UserController {
                 res.status(404).send('No users found');
             else
                 res.send(users);
+        })))
+            .post('/', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let newUser = new user_1.UserModel(new user_1.User(req.body.username));
+            newUser.save();
+            res.status(201).send(`User ${newUser.username} has been created.`);
         })));
     }
 }

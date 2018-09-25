@@ -45,11 +45,11 @@ __decorate([
 ], EducationItem.prototype, "degreeTitle", void 0);
 __decorate([
     typegoose_1.prop(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], EducationItem.prototype, "startYear", void 0);
 __decorate([
     typegoose_1.prop(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], EducationItem.prototype, "endYear", void 0);
 __decorate([
     typegoose_1.prop(),
