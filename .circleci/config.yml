@@ -68,7 +68,7 @@ jobs:
             ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - run:
           name: Clone master branch
-          command: git clone git@github.com/pakdproject/linkedout-backend.git backend
+          command: git clone git@github.com:pakdproject/linkedout-backend.git backend
       - attach_workspace:
           at: ./backend
       - run:
