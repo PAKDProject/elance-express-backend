@@ -53,9 +53,6 @@ jobs:
     docker:
       - image: circleci/node:10
     steps:
-      - run: 
-          name: debugging
-          command: ls -lt && cd dist && ls -lt 
       - run:
           name: Add github as known_host
           command: |
