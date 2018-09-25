@@ -68,6 +68,9 @@ jobs:
           command: git clone https://github.com/pakdproject/linkedout-backend.git backend
       - attach_workspace:
           at: ./backend
+      - run: 
+          name: CD into cloned repo
+          command: cd backend
       - run:
           name: Add git config
           command: git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998"
