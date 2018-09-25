@@ -30,5 +30,13 @@ export class UserController implements BaseRouter {
                 if (users.length === 0) res.status(404).send('No users found')
                 else res.send(users)
             }))
+            .post('/:username', asyncRoutes(async (req: Request, res: Response, next: NextFunction) => {
+                let params = {
+                    username: req.params.username
+                }
+                let user = new UserModel(new User(params.username))
+                await user.save()
+                res.status(201).send(`User ${user.username} has been created.`)
+            }))
     }
 }
