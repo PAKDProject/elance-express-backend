@@ -21,10 +21,10 @@ export class EducationItem {
     degreeTitle?: string
 
     @prop()
-    startYear?: Date
+    startYear?: string
 
     @prop()
-    endYear?: Date
+    endYear?: string
 
     @prop()
     collegeName?: string
@@ -92,7 +92,7 @@ export class User extends Typegoose {
     tagline?: string
 
     @arrayProp({itemsRef: User})
-    contacts?: User[]
+    contacts?: Ref<User>[]
 
     constructor(username?: string, fName?: string, lName?: string, dob?: Date, summary?: string, skills?: Skill[], educationItems?: EducationItem[], activeJobs?: Job[], jobHistory?: Job[], avatarUrl?: string, backgroundUrl?: string, socialLinks?: SocialLink[], tagline?: string, contacts?: User[]) {
         super()
