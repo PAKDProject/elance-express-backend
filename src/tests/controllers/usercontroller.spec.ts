@@ -30,6 +30,7 @@ describe('Testing the User Controller', () => {
     it('Should insert a new user at /', done => {
         const user = {
             username: 'xXx_JeffBezos_xXx',
+            email: 'jeffmoneybezor@aws.com',
             fName: 'Jeff',
             lName: 'Bezos',
             dob: new Date('01/01/01'),
@@ -73,7 +74,20 @@ describe('Testing the User Controller', () => {
         })
     })
 
-    it('Should update user at /:id when ID is passed')
+    it('Should update user at /:id when ID is passed', done => {
+        const userChanges = {
+            fName: 'Money',
+            lName: 'Bags'
+        }
+        chai.request(apiUrl)
+        .put('/' + '5baaa264480dbc1757b7f00f')
+        .send(userChanges)
+        .end((_err, res) => {
+            chai.expect(res.status).to.equal(202)
+            done()
+        })
+    })
+    
     it('Should return all relevant users at /search/:query is used')
 
     after(() => {
