@@ -49,7 +49,7 @@ jobs:
               - config
               - package.json
               - package-lock.json
-              - .git
+              - .git/
   merge_to_master:
     docker:
       - image: circleci/node:10
