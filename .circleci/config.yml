@@ -72,9 +72,6 @@ jobs:
       - attach_workspace:
           at: ./backend
       - run:
-          name: Install ansible
-          command: sudo apt install ansible
-      - run:
           name: Push changes
           command: |
             cd backend 
