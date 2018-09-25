@@ -74,27 +74,34 @@ jobs:
           at: ./backend
       - run:
           name: Add git config
-          command: cd backend && git config --global user.email "ali9427@windowslive.com" && git config --global user.name "alanj1998" &&  git config --global credential.helper cache
-      - run:
-          name: Add changed files
-          command: cd backend && git add .
+          command: |
+            cd backend 
+            git config credential.helper 'cache --timeout=120'
+            git config --global user.email "ali9427@windowslive.com"
+            git config --global user.name "alanj1998" &&  git config --global credential.helper cache
+            git add .
+            git commit --allow-empty -m "merged from dev"
+            git push -q https://www.github.com/pakdproject/linkedout-backend.git master
       # - run:
-      #     name: Ignore all unecessary files
-      #     command: |
-      #       for file in *; do
-      #         if [[ $file != "dist" && $file != "config" && $file != "package.json" ]]; then
-      #           git reset $file
-      #         fi
-      #       done
-      # - run:
-      #     name: Add changes to commit
-      #     command: git add dist -f && git add package.json && git add package-lock.json
-      - run: 
-          name: Commit fixed changes
-          command: cd backend && git commit -m "merged from dev"
-      - run: 
-          name: Push changes
-          command: cd backend && git push -q https://www.github.com/pakdproject/linkedout-backend.git master
+      #     name: Add changed files
+      #     command: cd backend && git add .
+      # # - run:
+      # #     name: Ignore all unecessary files
+      # #     command: |
+      # #       for file in *; do
+      # #         if [[ $file != "dist" && $file != "config" && $file != "package.json" ]]; then
+      # #           git reset $file
+      # #         fi
+      # #       done
+      # # - run:
+      # #     name: Add changes to commit
+      # #     command: git add dist -f && git add package.json && git add package-lock.json
+      # - run: 
+      #     name: Commit fixed changes
+      #     command: cd backend && git commit -m "merged from dev"
+      # - run: 
+      #     name: Push changes
+      #     command: cd backend && git push -q https://www.github.com/pakdproject/linkedout-backend.git master
               
 workflows:
   version: 2
