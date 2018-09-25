@@ -1,0 +1,56 @@
+version: 2
+defaults:
+  working_directory: ~/repo
+jobs:
+  Bootstrap:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - restore_cache:
+          key: npm-dependency-cache
+      - run:
+          name: Install node_modules
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: npm-dependency-cache
+  Test:
+    docker:
+      - image: circleci/node:10  
+    steps:
+      - checkout
+      - restore_cache:
+          key: npm-dependency-cache
+      - run:
+          name: Run production tests
+          command: npm run test
+  "Deploy to stage":
+    docker:
+      - image: circleci/node:10
+    steps:
+      - run:
+          name: Clone ansible and run in stage mode
+          command: |
+            git clone https://alanj1998:$DEPLOY_GIT_TOKEN@github.com/pakdproject/linkedout-infrastructure.git ansible
+            cd ansible
+            echo $VAULT_PASS > vault.txt
+            echo $PRIV_KEY > pass.pem
+            chmod 600 pass.pem
+            ansible-playbook -i stage/inventory deploy-backend.yml --vault-password-file vault.txt --extra-vars "ansible_ssh_private_key_file=pass.pem"
+            rm -r vault.txt
+            rm -r pass.pem
+
+workflows:
+  version: 2
+  "Test master and deploy to stage":
+    jobs:
+      - Bootstrap
+      - Test:
+          requires:
+            - Bootstrap
+      - "Deploy to stage":
+          requires:
+            - Test
+          context: secrets
