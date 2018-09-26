@@ -130,6 +130,10 @@ __decorate([
 __decorate([
     typegoose_1.prop(),
     __metadata("design:type", String)
+], User.prototype, "email", void 0);
+__decorate([
+    typegoose_1.prop(),
+    __metadata("design:type", String)
 ], User.prototype, "fName", void 0);
 __decorate([
     typegoose_1.prop(),

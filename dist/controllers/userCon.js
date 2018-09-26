@@ -38,9 +38,13 @@ class UserController {
                 res.send(users);
         })))
             .post('/', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            let newUser = new user_1.UserModel(new user_1.User(req.body.username));
+            let newUser = new user_1.UserModel(req.body);
             newUser.save();
-            res.status(201).send(`User ${newUser.username} has been created.`);
+            res.status(201).json({ msg: 'User created.', newUser });
+        })))
+            .put('/:id', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let user = yield user_1.UserModel.findUserById(req.params.id);
+            Object.assign(user, req.body).save(res.status(202).json({ msg: 'User updated.', user }));
         })));
     }
 }

@@ -32,6 +32,7 @@ export declare class SocialLink {
 */
 export declare class User extends Typegoose {
     username?: string;
+    email?: string;
     fName?: string;
     lName?: string;
     dob?: Date;
