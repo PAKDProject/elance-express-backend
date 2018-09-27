@@ -1,5 +1,5 @@
-import "mocha"
-import  * as chai  from 'chai'
+import { describe, before, it } from "mocha"
+import * as chai from 'chai'
 import { Server } from '../../lib/createServer'
 import chaiHttp = require('chai-http')
 
@@ -67,7 +67,7 @@ describe('Testing the User Controller', () => {
         chai.request(apiUrl)
         .post('/')
         .send(user)
-        .end((res: Response) => {
+        .end((_err, res) => {
             chai.expect(res.status).to.equal(201)
             chai.expect(res.body).to.have.property('msg').eql('User created.')
             done()
@@ -82,7 +82,7 @@ describe('Testing the User Controller', () => {
         chai.request(apiUrl)
         .put('/' + '5baab09a480dbc1757b7f010')
         .send(userChanges)
-        .end((res) => {
+        .end((_err, res) => {
             chai.expect(res.status).to.equal(202)
             chai.expect(res.body).to.have.property('msg').eql('User updated.')
             chai.expect(res.body.user).to.have.property('fName').eql('Money')
