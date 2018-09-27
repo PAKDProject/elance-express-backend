@@ -67,7 +67,7 @@ describe('Testing the User Controller', () => {
         chai.request(apiUrl)
         .post('/')
         .send(user)
-        .end((_err, res) => {
+        .end((res: Response) => {
             chai.expect(res.status).to.equal(201)
             done()
         })
