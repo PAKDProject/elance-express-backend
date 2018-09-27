@@ -80,7 +80,7 @@ jobs:
             git config --global user.name "alanj1998" &&  git config --global credential.helper cache
             git remote set-url origin https://alanj1998:$DEPLOY_GIT_TOKEN@github.com/pakdproject/linkedout-backend.git
             git add .
-            git commit --allow-empty -m "merged from dev -q"
+            git commit --allow-empty -m "merged from dev"
             git push -q origin master
                   
 workflows:
