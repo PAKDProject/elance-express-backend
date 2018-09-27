@@ -1,7 +1,6 @@
 import "mocha"
 import  * as chai  from 'chai'
 import { Server } from '../../lib/createServer'
-import { default as fetch } from 'node-fetch'
 import chaiHttp = require('chai-http')
 
 chai.use(chaiHttp)
@@ -83,7 +82,7 @@ describe('Testing the User Controller', () => {
         chai.request(apiUrl)
         .put('/' + '5baab09a480dbc1757b7f010')
         .send(userChanges)
-        .end((_err, res) => {
+        .end((res) => {
             chai.expect(res.status).to.equal(202)
             chai.expect(res.body).to.have.property('msg').eql('User updated.')
             chai.expect(res.body.user).to.have.property('fName').eql('Money')
