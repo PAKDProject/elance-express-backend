@@ -56,6 +56,9 @@ export class User extends Typegoose {
     username?: string
 
     @prop()
+    email?: string
+
+    @prop()
     fName?: string
 
     @prop()
