@@ -5,6 +5,7 @@
   "main": "dist/bin/start.js",
   "scripts": {
     "test:dev": "mocha -r ts-node/register --reporter spec src/tests/**/*.spec.ts",
+    "test": "mocha --reporter spec dist/tests/**/*.spec.js",
     "start": "export NODE_ENV=production && node dist/bin/start.js",
     "start:dev": "export NODE_ENV=development && ts-node src/bin/start.ts",
     "build": "tsc"

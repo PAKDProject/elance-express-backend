@@ -1,20 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("mocha");
+const mocha_1 = require("mocha");
 const chai = require("chai");
 const createServer_1 = require("../../lib/createServer");
 const chaiHttp = require("chai-http");
 chai.use(chaiHttp);
-describe('Testing the User Controller', () => {
+mocha_1.describe('Testing the User Controller', () => {
     const apiUrl = 'http://localhost:3000/user';
-    before(done => {
+    mocha_1.before(done => {
         let app = new createServer_1.Server(undefined, 'development');
         app.config().then(() => {
             app.start();
             done();
         });
     });
-    it('Should return all users', done => {
+    mocha_1.it('Should return all users', done => {
         chai.request(apiUrl)
             .get('')
             .end((_err, res) => {
@@ -24,7 +24,7 @@ describe('Testing the User Controller', () => {
             done();
         });
     });
-    it('Should insert a new user at /', done => {
+    mocha_1.it('Should insert a new user at /', done => {
         const user = {
             username: 'xXx_JeffBezos_xXx',
             email: 'jeffmoneybezor@aws.com',
@@ -71,7 +71,7 @@ describe('Testing the User Controller', () => {
             done();
         });
     });
-    it('Should update user at /:id when ID is passed', done => {
+    mocha_1.it('Should update user at /:id when ID is passed', done => {
         const userChanges = {
             fName: 'Money',
             lName: 'Bags'
@@ -87,8 +87,8 @@ describe('Testing the User Controller', () => {
             done();
         });
     });
-    it('Should return all relevant users at /search/:query is used');
-    it('Should delete the user at /:id when ID is passed');
+    mocha_1.it('Should return all relevant users at /search/:query is used');
+    mocha_1.it('Should delete the user at /:id when ID is passed');
     after(() => {
         process.exit(0);
     });
