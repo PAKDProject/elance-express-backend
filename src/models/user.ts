@@ -52,8 +52,6 @@ export class SocialLink {
 * @extends Typegoose
 */
 export class User extends Typegoose {
-    @prop()
-    username?: string
 
     @prop()
     email?: string
@@ -97,9 +95,9 @@ export class User extends Typegoose {
     @arrayProp({itemsRef: User})
     contacts?: Ref<User>[]
 
-    constructor(username?: string, fName?: string, lName?: string, dob?: Date, summary?: string, skills?: Skill[], educationItems?: EducationItem[], activeJobs?: Job[], jobHistory?: Job[], avatarUrl?: string, backgroundUrl?: string, socialLinks?: SocialLink[], tagline?: string, contacts?: User[]) {
+    constructor(email?: string, fName?: string, lName?: string, dob?: Date, summary?: string, skills?: Skill[], educationItems?: EducationItem[], activeJobs?: Job[], jobHistory?: Job[], avatarUrl?: string, backgroundUrl?: string, socialLinks?: SocialLink[], tagline?: string, contacts?: User[]) {
         super()
-        this.username = username
+        this.email = email
         this.fName = fName
         this.lName = lName
         this.dob = dob
