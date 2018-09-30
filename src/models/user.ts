@@ -126,14 +126,27 @@ export class User extends Typegoose {
     // Find a user based on the name given
     @staticMethod
     static async findUserByName(this: ModelType<User>, name: string) {
-        return await this.findOne({name: name})
+        return await this.findOne({ name: name })
     }
 
     // Find a user based on the ID given
     @staticMethod
     static async findUserById(this: ModelType<User>, id: string) {
         let o_id = new ObjectId(id)
-        return await this.findOne({_id: o_id})
+        return await this.findOne({ _id: o_id })
+    }
+
+    // Delete a user based on the ID given
+    @staticMethod
+    static async deleteUserById(this: ModelType<User>, id: string) {
+        let o_id = new ObjectId(id)
+        return await this.deleteOne({ _id: o_id })
+    }
+
+    // Empty this collection(for testing purposes)
+    @staticMethod
+    static async deleteAllUsers(this: ModelType<User>) {
+        return await this.deleteMany({});
     }
 }
 

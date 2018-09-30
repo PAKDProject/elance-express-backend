@@ -1,4 +1,4 @@
-import { describe, before, it } from "mocha"
+import { describe, before, it, beforeEach } from "mocha"
 import * as chai from 'chai'
 import { Server } from '../../lib/createServer'
 import chaiHttp = require('chai-http')
@@ -13,6 +13,10 @@ describe('Testing the User Controller', () => {
             app.start()
             done()
         })
+    })
+
+    beforeEach((done) => {
+        
     })
 
     it('Should return all users', done => {
