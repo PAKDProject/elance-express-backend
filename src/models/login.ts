@@ -7,7 +7,7 @@ import { ObjectId } from 'mongodb'
 */
 export class Login extends Typegoose {
     @prop()
-    username?: string
+    email?: string
 
     @prop()
     password?: string
@@ -18,33 +18,33 @@ export class Login extends Typegoose {
     @prop()
     userId?: ObjectId
 
-    constructor(username?: string, password?: string, userId?: ObjectId) {
+    constructor(email?: string, password?: string, userId?: ObjectId) {
         super()
-        this.username = username;
+        this.email = email;
         this.password = password;
         this.userId = userId;
     }
 
     /**
-    * Find login by username
+    * Find login by email
     * @param this - context
-    * @param username - username for the person
+    * @param email - email for the person
     */
     @staticMethod
-    static async findLoginByUsername(this: ModelType<Login>, username: string) {
-        return await this.find({username: username})
+    static async findLoginByEmail(this: ModelType<Login>, email: string) {
+        return await this.find({email: email})
     }
 
     /**
      * Adding new login details
      * @param this - context
-     * @param username - username
+     * @param email - email
      * @param encryptedPassword - password which is encrypted by hash
      * @param userId - userId to correlate user with login details
      */
     @staticMethod
-    static async addNewLogin(this: ModelType<Login>, username: string, encryptedPassword: string, userId: ObjectId) {
-        return await this.insertMany(new Login(username, encryptedPassword, userId));
+    static async addNewLogin(this: ModelType<Login>, email: string, encryptedPassword: string, userId: ObjectId) {
+        return await this.insertMany(new Login(email, encryptedPassword, userId));
     }
 
 }
