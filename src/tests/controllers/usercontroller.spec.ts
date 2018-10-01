@@ -2,11 +2,12 @@ import { describe, before, it, beforeEach } from "mocha"
 import * as chai from 'chai'
 import { Server } from '../../lib/createServer'
 import chaiHttp = require('chai-http')
-import { UserModel } from "../../models/user";
+import { UserModel, User } from "../../models/user";
 
 chai.use(chaiHttp)
 
 describe('Testing the User Controller', () => {
+    let emails: string[] = [];
     const apiUrl = 'http://localhost:3000/user'
     before(done => {
         let app = new Server( undefined, 'development')
@@ -47,7 +48,9 @@ describe('Testing the User Controller', () => {
                     }
                 ],
                 tagline: 'The real OG'
-            }).save()
+            }).save((err,pr)=> {
+                emails.push(pr.email as string);
+            })
             new UserModel({
                 email: 'jeffmoneybezos2@aws.com',
                 fName: 'Jeff',
@@ -83,7 +86,9 @@ describe('Testing the User Controller', () => {
                     }
                 ],
                 tagline: 'The real OG'
-            }).save()
+            }).save((err, pr) => {
+                emails.push(pr.email as string);
+            })
             done()
         })
     })
@@ -173,7 +178,8 @@ describe('Testing the User Controller', () => {
     it('Should delete the user at /:id when ID is passed')
 
     after(done => {
-        UserModel.deleteMany({}, (_err) => {
+        emails.push("jeffmoneybezos3@aws.com");
+        UserModel.deleteMany({email: emails}, (_err) => {
             done()
             process.exit(0)
         })
