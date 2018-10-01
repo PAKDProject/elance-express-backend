@@ -7,7 +7,7 @@ import { dropCollection } from 'mongoose'
  */
 export async function up (done) {
   let salt = await genSalt(10);
-  let hashedPass = hash('test1234', salt)
+  let hashedPass = await hash('test1234', salt)
   let user = new Login(
     email = 'alan@test.com',
     password = hashedPass,
