@@ -31,7 +31,6 @@ export declare class SocialLink {
 * @extends Typegoose
 */
 export declare class User extends Typegoose {
-    username?: string;
     email?: string;
     fName?: string;
     lName?: string;
@@ -46,7 +45,7 @@ export declare class User extends Typegoose {
     socialLinks?: SocialLink[];
     tagline?: string;
     contacts?: Ref<User>[];
-    constructor(username?: string, fName?: string, lName?: string, dob?: Date, summary?: string, skills?: Skill[], educationItems?: EducationItem[], activeJobs?: Job[], jobHistory?: Job[], avatarUrl?: string, backgroundUrl?: string, socialLinks?: SocialLink[], tagline?: string, contacts?: User[]);
+    constructor(email?: string, fName?: string, lName?: string, dob?: Date, summary?: string, skills?: Skill[], educationItems?: EducationItem[], activeJobs?: Job[], jobHistory?: Job[], avatarUrl?: string, backgroundUrl?: string, socialLinks?: SocialLink[], tagline?: string, contacts?: User[]);
     /**
     * Default method for finding all Users
     * @param this - context
@@ -54,5 +53,7 @@ export declare class User extends Typegoose {
     static findAllUsers(this: ModelType<User>): Promise<import("typegoose").InstanceType<User>[]>;
     static findUserByName(this: ModelType<User>, name: string): Promise<import("typegoose").InstanceType<User> | null>;
     static findUserById(this: ModelType<User>, id: string): Promise<import("typegoose").InstanceType<User> | null>;
+    static deleteUserById(this: ModelType<User>, id: string): Promise<any>;
+    static deleteAllUsers(this: ModelType<User>): Promise<any>;
 }
 export declare const UserModel: import("mongoose").Model<import("typegoose").InstanceType<User>> & User & typeof User;
