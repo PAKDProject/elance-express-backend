@@ -26,16 +26,19 @@ describe('Testing the Login Controller', () => {
     )
     let userId: ObjectId
     before(async done => {
+        //Starting dev server for testing
         let server = await new Server(undefined, 'development')
         await server.config()
         await server.start()
 
+        //Save a test user
         await new UserModel(user).save((err, addedUser) => {
             if(err) throw err
             userLogin.userId = addedUser._id
             userId = addedUser._id
         })
 
+        //Hash a password for the user, save their login details
         let hashedPass = await hash('hashmeplz', 10)
         userLogin.password = hashedPass
         await new LoginModel(userLogin).save()
@@ -92,5 +95,40 @@ describe('Testing the Login Controller', () => {
             chai.expect(res.body.err).to.equal('Wrong email or password entered!')
             done()
         })
+    })
+
+    it('Should return 400 if no password is passed to POST /login', done => {
+        let { email } = userLogin
+
+        chai.request(getConfig('backendUrl'))
+        .post('/login')
+        .send({
+            email
+        })
+        .then(res => {
+            chai.expect(res.status).to.equal(400)
+            chai.expect(res.body.err).to.equal('No email or password entered!')
+            done()
+        })
+    })
+    
+    it('Should return 400 if no email is passed to POST /login', done => {
+        chai.request(getConfig('backendUrl'))
+        .post('/login')
+        .send({
+            password: 'hashmeplz'
+        })
+        .then(res => {
+            chai.expect(res.status).to.equal(400)
+            chai.expect(res.body.err).to.equal('No email or password entered!')
+            done()
+        })
+    })
+
+    after(async done => {
+        // Delete all test data from db
+        await UserModel.deleteMany({$and: [{fName: user.fName},{lName: user.lName}, {email: user.email}]})
+        await LoginModel.deleteMany({$and: [{email: userLogin.email}]})
+        done()
     })
 })
