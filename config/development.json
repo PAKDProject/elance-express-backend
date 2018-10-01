@@ -1,5 +1,6 @@
 {
     "db": {
         "url": "mongodb://elance:testing1234@ds163182.mlab.com:63182/app-elance-site"
-    }
+    },
+    "frontendUrl": "http://localhost:4200"
 }
