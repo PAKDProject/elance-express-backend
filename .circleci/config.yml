@@ -32,7 +32,11 @@ jobs:
     steps:
       - run:
           name: Install ansible
-          command: sudo apt install ansible
+          command: |
+            sudo apt-get install software-properties-common
+            sudo apt-add-repository ppa:ansible/ansible
+            sudo apt-get update
+            sudo apt-get install ansible
       - run:
           name: Clone ansible and run in stage mode
           command: |
