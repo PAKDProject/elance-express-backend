@@ -15,7 +15,7 @@ jobs:
           key: npm-dependency-cache-{{checksum "package.json"}}
       - run:
           name: Install node_modules
-          command: 'sudo npm install'
+          command: 'sudo npm install  --unsafe-perm'
       - save_cache:
           key: npm-dependency-cache-{{checksum "package.json"}}
           paths:
@@ -93,15 +93,3 @@ workflows:
             branches:
               only:
                 - development
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
-      - transpile:
-          requires:
-            - test
-      - merge_to_master:
-          requires:
-            - transpile
-          context: secrets
