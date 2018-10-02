@@ -134,17 +134,17 @@ export class User extends Typegoose {
         return await this.findOne({ _id: o_id })
     }
 
+    // Query the user collection
+    @staticMethod
+    static async findUsersByQuery(this: ModelType<User>, query: object) {
+        return await this.find(query)
+    }
+
     // Delete a user based on the ID given
     @staticMethod
     static async deleteUserById(this: ModelType<User>, id: string) {
         let o_id = new ObjectId(id)
         return await this.deleteOne({ _id: o_id })
-    }
-
-    // Empty this collection(for testing purposes)
-    @staticMethod
-    static async deleteAllUsers(this: ModelType<User>) {
-        return await this.deleteMany({});
     }
 }
 
