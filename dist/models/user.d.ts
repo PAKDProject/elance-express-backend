@@ -13,8 +13,8 @@ export declare class Skill {
  */
 export declare class EducationItem {
     degreeTitle?: string;
-    startYear?: Date;
-    endYear?: Date;
+    startYear?: string;
+    endYear?: string;
     collegeName?: string;
     grade?: string;
     description?: string;
@@ -31,7 +31,7 @@ export declare class SocialLink {
 * @extends Typegoose
 */
 export declare class User extends Typegoose {
-    username?: string;
+    email?: string;
     fName?: string;
     lName?: string;
     dob?: Date;
@@ -44,8 +44,8 @@ export declare class User extends Typegoose {
     backgroundUrl?: string;
     socialLinks?: SocialLink[];
     tagline?: string;
-    contacts?: User[];
-    constructor(username?: string, fName?: string, lName?: string, dob?: Date, summary?: string, skills?: Skill[], educationItems?: EducationItem[], activeJobs?: Job[], jobHistory?: Job[], avatarUrl?: string, backgroundUrl?: string, socialLinks?: SocialLink[], tagline?: string, contacts?: User[]);
+    contacts?: Ref<User>[];
+    constructor(email?: string, fName?: string, lName?: string, dob?: Date, summary?: string, skills?: Skill[], educationItems?: EducationItem[], activeJobs?: Job[], jobHistory?: Job[], avatarUrl?: string, backgroundUrl?: string, socialLinks?: SocialLink[], tagline?: string, contacts?: User[]);
     /**
     * Default method for finding all Users
     * @param this - context
@@ -53,5 +53,7 @@ export declare class User extends Typegoose {
     static findAllUsers(this: ModelType<User>): Promise<import("typegoose").InstanceType<User>[]>;
     static findUserByName(this: ModelType<User>, name: string): Promise<import("typegoose").InstanceType<User> | null>;
     static findUserById(this: ModelType<User>, id: string): Promise<import("typegoose").InstanceType<User> | null>;
+    static findUsersByQuery(this: ModelType<User>, query: object): Promise<import("typegoose").InstanceType<User>[]>;
+    static deleteUserById(this: ModelType<User>, id: string): Promise<any>;
 }
 export declare const UserModel: import("mongoose").Model<import("typegoose").InstanceType<User>> & User & typeof User;

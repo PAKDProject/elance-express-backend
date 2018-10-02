@@ -33,9 +33,45 @@ class UserController {
             .get('/', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
             let users = yield user_1.UserModel.findAllUsers();
             if (users.length === 0)
-                res.status(404).send('No users found');
+                res.status(404).send('No users found.');
             else
-                res.send(users);
+                res.status(200).json({ msg: "Users found.", users });
+        })))
+            .get('/:id', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let user = yield user_1.UserModel.findUserById(req.params.id);
+            if (!user)
+                res.status(404).send('User not found.');
+            else
+                res.status(200).json({ msg: "User found.", user });
+        })))
+            .get('/search/:query', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            const queryObject = JSON.parse(decodeURIComponent(req.params.query));
+            let users = yield user_1.UserModel.findUsersByQuery(queryObject);
+            if (users.length === 0)
+                res.status(404).send('No users found.');
+            else
+                res.status(200).json({ msg: "Users found.", users });
+        })))
+            .post('/', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let user = new user_1.UserModel(req.body);
+            yield user.save();
+            res.status(201).json({ msg: 'User created.', user });
+        })))
+            .put('/:id', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let user = yield user_1.UserModel.findUserById(req.params.id);
+            if (!user)
+                res.status(404).send('User not found.');
+            else
+                Object.assign(user, req.body).save(res.status(202).json({ msg: 'User updated.', user }));
+        })))
+            .delete('/:id', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            let user = yield user_1.UserModel.findUserById(req.params.id);
+            if (!user)
+                res.status(404).send('User not found.');
+            else {
+                user_1.UserModel.deleteUserById(req.params.id);
+                res.status(200).json({ msg: 'User deleted.', user });
+            }
         })));
     }
 }

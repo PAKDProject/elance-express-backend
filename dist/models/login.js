@@ -24,39 +24,39 @@ const mongodb_1 = require("mongodb");
 * @extends Typegoose
 */
 class Login extends typegoose_1.Typegoose {
-    constructor(username, password, userId) {
+    constructor(email, password, userId) {
         super();
-        this.username = username;
+        this.email = email;
         this.password = password;
         this.userId = userId;
     }
     /**
-    * Find login by username
+    * Find login by email
     * @param this - context
-    * @param username - username for the person
+    * @param email - email for the person
     */
-    static findLoginByUsername(username) {
+    static findLoginByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.find({ username: username });
+            return yield this.find({ email: email });
         });
     }
     /**
      * Adding new login details
      * @param this - context
-     * @param username - username
+     * @param email - email
      * @param encryptedPassword - password which is encrypted by hash
      * @param userId - userId to correlate user with login details
      */
-    static addNewLogin(username, encryptedPassword, userId) {
+    static addNewLogin(email, encryptedPassword, userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.insertMany(new Login(username, encryptedPassword, userId));
+            return yield this.insertMany(new Login(email, encryptedPassword, userId));
         });
     }
 }
 __decorate([
     typegoose_1.prop(),
     __metadata("design:type", String)
-], Login.prototype, "username", void 0);
+], Login.prototype, "email", void 0);
 __decorate([
     typegoose_1.prop(),
     __metadata("design:type", String)
@@ -74,7 +74,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], Login, "findLoginByUsername", null);
+], Login, "findLoginByEmail", null);
 __decorate([
     typegoose_1.staticMethod,
     __metadata("design:type", Function),

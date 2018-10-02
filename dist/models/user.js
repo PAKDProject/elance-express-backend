@@ -45,11 +45,11 @@ __decorate([
 ], EducationItem.prototype, "degreeTitle", void 0);
 __decorate([
     typegoose_1.prop(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], EducationItem.prototype, "startYear", void 0);
 __decorate([
     typegoose_1.prop(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], EducationItem.prototype, "endYear", void 0);
 __decorate([
     typegoose_1.prop(),
@@ -83,9 +83,9 @@ exports.SocialLink = SocialLink;
 * @extends Typegoose
 */
 class User extends typegoose_1.Typegoose {
-    constructor(username, fName, lName, dob, summary, skills, educationItems, activeJobs, jobHistory, avatarUrl, backgroundUrl, socialLinks, tagline, contacts) {
+    constructor(email, fName, lName, dob, summary, skills, educationItems, activeJobs, jobHistory, avatarUrl, backgroundUrl, socialLinks, tagline, contacts) {
         super();
-        this.username = username;
+        this.email = email;
         this.fName = fName;
         this.lName = lName;
         this.dob = dob;
@@ -122,11 +122,24 @@ class User extends typegoose_1.Typegoose {
             return yield this.findOne({ _id: o_id });
         });
     }
+    // Query the user collection
+    static findUsersByQuery(query) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.find(query);
+        });
+    }
+    // Delete a user based on the ID given
+    static deleteUserById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let o_id = new mongodb_1.ObjectId(id);
+            return yield this.deleteOne({ _id: o_id });
+        });
+    }
 }
 __decorate([
     typegoose_1.prop(),
     __metadata("design:type", String)
-], User.prototype, "username", void 0);
+], User.prototype, "email", void 0);
 __decorate([
     typegoose_1.prop(),
     __metadata("design:type", String)
@@ -197,6 +210,18 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], User, "findUserById", null);
+__decorate([
+    typegoose_1.staticMethod,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], User, "findUsersByQuery", null);
+__decorate([
+    typegoose_1.staticMethod,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], User, "deleteUserById", null);
 exports.User = User;
 exports.UserModel = new User().getModelForClass(User);
 //# sourceMappingURL=user.js.map
