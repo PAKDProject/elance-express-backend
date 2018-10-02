@@ -96,11 +96,37 @@ describe('Testing the User Controller', () => {
     it('Should return all users', done => {
         chai.request(apiUrl)
         .get('')
-        .end((_err, res) => {
-            chai.expect(res).to.not.be.null
+        .then(res => {
             chai.expect(res.status).to.equal(200)
-            chai.expect(res.body).to.have.property('users')
-            chai.expect(res).to.not.be.undefined
+            chai.expect(res.body).to.have.property('msg').eql("Users found.")
+            chai.expect(res.body).to.have.property('users').not.null
+            done()
+        })
+    })
+
+    it('Should return the user at /:id', done => {
+        UserModel.findOne({}, (_err, user) => {
+            if(user){
+                chai.request(apiUrl)
+                .get('/' + user._id)
+                .then(res => {
+                    chai.expect(res.status).to.equal(200)
+                    chai.expect(res.body).to.have.property('msg').eql('User found.')
+                    chai.expect(res.body).to.have.property('user').not.null
+                    done()
+                })
+            }
+        })
+    })
+
+    it('Should return all relevant users at /search/:query is used', done => {
+        const query = encodeURIComponent(JSON.stringify({fName: "Jeff", email: "jeffmoneybezos2@aws.com"}))
+        chai.request(apiUrl)
+        .get('/search/' + query)
+        .then(res => {
+            chai.expect(res.status).to.equal(200)
+            chai.expect(res.body).to.have.property('msg').eql('Users found.')
+            chai.expect(res.body).to.have.property('users').not.null
             done()
         })
     })
@@ -145,9 +171,10 @@ describe('Testing the User Controller', () => {
         chai.request(apiUrl)
         .post('/')
         .send(user)
-        .end((_err, res) => {
+        .then(res => {
             chai.expect(res.status).to.equal(201)
             chai.expect(res.body).to.have.property('msg').eql('User created.')
+            chai.expect(res.body).to.have.property('user').not.null
             done()
         })
     })
@@ -162,7 +189,7 @@ describe('Testing the User Controller', () => {
                 chai.request(apiUrl)
                 .put('/' + user._id)
                 .send(userChanges)
-                .end((_err, res) => {
+                .then(res => {
                     chai.expect(res.status).to.equal(202)
                     chai.expect(res.body).to.have.property('msg').eql('User updated.')
                     chai.expect(res.body.user).to.have.property('fName').eql('Money')
@@ -172,10 +199,21 @@ describe('Testing the User Controller', () => {
             }
         })
     })
-    
-    it('Should return all relevant users at /search/:query is used')
 
-    it('Should delete the user at /:id when ID is passed')
+    it('Should delete the user at /:id when ID is passed', done => {
+        UserModel.findOne({}, (_err, user) => {
+            if (user){
+                chai.request(apiUrl)
+                .del('/' + user._id)
+                .then(res => {
+                    chai.expect(res.status).to.equal(200)
+                    chai.expect(res.body).to.have.property('msg').eql('User deleted.')
+                    chai.expect(res.body).to.have.property('user').not.null
+                    done()
+                })
+            }
+        })
+    })
 
     after(done => {
         emails.push("jeffmoneybezos3@aws.com");

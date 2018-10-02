@@ -35,10 +35,16 @@ export class UserController implements BaseRouter {
                 if (!user) res.status(404).send('User not found.')
                 else res.status(200).json({msg: "User found.", user})
             }))
+            .get('/search/:query', asyncRoutes(async (req: Request, res: Response, next: NextFunction) => {
+                const queryObject = JSON.parse(decodeURIComponent(req.params.query))
+                let users = await UserModel.findUsersByQuery(queryObject)
+                if (users.length === 0) res.status(404).send('No users found.')
+                else res.status(200).json({msg: "Users found.", users})
+            }))
             .post('/', asyncRoutes(async (req: Request, res: Response, next: NextFunction) => {
-                let newUser = new UserModel(req.body)
-                await newUser.save()
-                res.status(201).json({msg: 'User created.', newUser})
+                let user = new UserModel(req.body)
+                await user.save()
+                res.status(201).json({msg: 'User created.', user})
             }))
             .put('/:id', asyncRoutes(async (req: Request, res: Response, next: NextFunction) => {
                 let user = await UserModel.findUserById(req.params.id)
@@ -52,14 +58,6 @@ export class UserController implements BaseRouter {
                     UserModel.deleteUserById(req.params.id)
                     res.status(200).json({msg: 'User deleted.', user})
                 } 
-            }))
-            .delete('/', asyncRoutes(async (req: Request, res: Response, next: NextFunction) => {
-                let users = await UserModel.findAllUsers()
-                if (users.length === 0) res.status(404).send('No users found.')
-                else {
-                    UserModel.deleteAllUsers()
-                    res.status(200).json({msg: "All users deleted.", users})
-                }
             }))
     }
 }
