@@ -44,10 +44,18 @@ class UserController {
             else
                 res.status(200).json({ msg: "User found.", user });
         })))
+            .get('/search/:query', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            const queryObject = JSON.parse(decodeURIComponent(req.params.query));
+            let users = yield user_1.UserModel.findUsersByQuery(queryObject);
+            if (users.length === 0)
+                res.status(404).send('No users found.');
+            else
+                res.status(200).json({ msg: "Users found.", users });
+        })))
             .post('/', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            let newUser = new user_1.UserModel(req.body);
-            yield newUser.save();
-            res.status(201).json({ msg: 'User created.', newUser });
+            let user = new user_1.UserModel(req.body);
+            yield user.save();
+            res.status(201).json({ msg: 'User created.', user });
         })))
             .put('/:id', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
             let user = yield user_1.UserModel.findUserById(req.params.id);
@@ -63,15 +71,6 @@ class UserController {
             else {
                 user_1.UserModel.deleteUserById(req.params.id);
                 res.status(200).json({ msg: 'User deleted.', user });
-            }
-        })))
-            .delete('/', asyncRoutes_1.asyncRoutes((req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            let users = yield user_1.UserModel.findAllUsers();
-            if (users.length === 0)
-                res.status(404).send('No users found.');
-            else {
-                user_1.UserModel.deleteAllUsers();
-                res.status(200).json({ msg: "All users deleted.", users });
             }
         })));
     }

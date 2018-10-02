@@ -53,7 +53,7 @@ export declare class User extends Typegoose {
     static findAllUsers(this: ModelType<User>): Promise<import("typegoose").InstanceType<User>[]>;
     static findUserByName(this: ModelType<User>, name: string): Promise<import("typegoose").InstanceType<User> | null>;
     static findUserById(this: ModelType<User>, id: string): Promise<import("typegoose").InstanceType<User> | null>;
+    static findUsersByQuery(this: ModelType<User>, query: object): Promise<import("typegoose").InstanceType<User>[]>;
     static deleteUserById(this: ModelType<User>, id: string): Promise<any>;
-    static deleteAllUsers(this: ModelType<User>): Promise<any>;
 }
 export declare const UserModel: import("mongoose").Model<import("typegoose").InstanceType<User>> & User & typeof User;

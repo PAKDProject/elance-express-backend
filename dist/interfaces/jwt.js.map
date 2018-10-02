@@ -1,0 +1,1 @@
+{"version":3,"file":"jwt.js","sourceRoot":"","sources":["../../src/interfaces/jwt.ts"],"names":[],"mappings":"","sourcesContent":["import { ObjectId } from \"mongodb\";\n\nexport interface IJWT {\n    userId: ObjectId,\n    expiry: string\n}"]}

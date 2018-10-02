@@ -1,4 +1,5 @@
 import { UserController as User } from "./userCon";
 import { LoginController as Login } from "./loginCon";
-declare const _default: (User | Login)[];
+import { IndexController as Index } from "./indexCon";
+declare const _default: (User | Login | Index)[];
 export default _default;

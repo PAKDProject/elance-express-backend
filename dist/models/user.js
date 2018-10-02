@@ -122,17 +122,17 @@ class User extends typegoose_1.Typegoose {
             return yield this.findOne({ _id: o_id });
         });
     }
+    // Query the user collection
+    static findUsersByQuery(query) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.find(query);
+        });
+    }
     // Delete a user based on the ID given
     static deleteUserById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             let o_id = new mongodb_1.ObjectId(id);
             return yield this.deleteOne({ _id: o_id });
-        });
-    }
-    // Empty this collection(for testing purposes)
-    static deleteAllUsers() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield this.deleteMany({});
         });
     }
 }
@@ -213,15 +213,15 @@ __decorate([
 __decorate([
     typegoose_1.staticMethod,
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], User, "deleteUserById", null);
+], User, "findUsersByQuery", null);
 __decorate([
     typegoose_1.staticMethod,
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], User, "deleteAllUsers", null);
+], User, "deleteUserById", null);
 exports.User = User;
 exports.UserModel = new User().getModelForClass(User);
 //# sourceMappingURL=user.js.map

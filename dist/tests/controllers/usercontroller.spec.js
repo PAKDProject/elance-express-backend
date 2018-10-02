@@ -7,6 +7,7 @@ const chaiHttp = require("chai-http");
 const user_1 = require("../../models/user");
 chai.use(chaiHttp);
 mocha_1.describe('Testing the User Controller', () => {
+    let emails = [];
     const apiUrl = 'http://localhost:3000/user';
     mocha_1.before(done => {
         let app = new createServer_1.Server(undefined, 'development');
@@ -47,7 +48,9 @@ mocha_1.describe('Testing the User Controller', () => {
                     }
                 ],
                 tagline: 'The real OG'
-            }).save();
+            }).save((err, pr) => {
+                emails.push(pr.email);
+            });
             new user_1.UserModel({
                 email: 'jeffmoneybezos2@aws.com',
                 fName: 'Jeff',
@@ -83,18 +86,44 @@ mocha_1.describe('Testing the User Controller', () => {
                     }
                 ],
                 tagline: 'The real OG'
-            }).save();
+            }).save((err, pr) => {
+                emails.push(pr.email);
+            });
             done();
         });
     });
     mocha_1.it('Should return all users', done => {
         chai.request(apiUrl)
             .get('')
-            .end((_err, res) => {
-            chai.expect(res).to.not.be.null;
+            .then(res => {
             chai.expect(res.status).to.equal(200);
-            chai.expect(res.body).to.have.property('users');
-            chai.expect(res).to.not.be.undefined;
+            chai.expect(res.body).to.have.property('msg').eql("Users found.");
+            chai.expect(res.body).to.have.property('users').not.null;
+            done();
+        });
+    });
+    mocha_1.it('Should return the user at /:id', done => {
+        user_1.UserModel.findOne({}, (_err, user) => {
+            if (user) {
+                chai.request(apiUrl)
+                    .get('/' + user._id)
+                    .then(res => {
+                    chai.expect(res.status).to.equal(200);
+                    chai.expect(res.body).to.have.property('msg').eql('User found.');
+                    chai.expect(res.body).to.have.property('user').not.null;
+                    done();
+                });
+            }
+        });
+    });
+    mocha_1.it('Should return all relevant users at /search/:query is used', done => {
+        const query = encodeURIComponent(JSON.stringify({ fName: "Jeff", email: "jeffmoneybezos2@aws.com" }));
+        chai.request(apiUrl)
+            .get('/search/' + query)
+            .then(res => {
+            chai.expect(res.status).to.equal(200);
+            chai.expect(res.body).to.have.property('msg').eql('Users found.');
+            chai.expect(res.body).to.have.property('users').not.null;
             done();
         });
     });
@@ -138,9 +167,10 @@ mocha_1.describe('Testing the User Controller', () => {
         chai.request(apiUrl)
             .post('/')
             .send(user)
-            .end((_err, res) => {
+            .then(res => {
             chai.expect(res.status).to.equal(201);
             chai.expect(res.body).to.have.property('msg').eql('User created.');
+            chai.expect(res.body).to.have.property('user').not.null;
             done();
         });
     });
@@ -154,7 +184,7 @@ mocha_1.describe('Testing the User Controller', () => {
                 chai.request(apiUrl)
                     .put('/' + user._id)
                     .send(userChanges)
-                    .end((_err, res) => {
+                    .then(res => {
                     chai.expect(res.status).to.equal(202);
                     chai.expect(res.body).to.have.property('msg').eql('User updated.');
                     chai.expect(res.body.user).to.have.property('fName').eql('Money');
@@ -164,10 +194,23 @@ mocha_1.describe('Testing the User Controller', () => {
             }
         });
     });
-    mocha_1.it('Should return all relevant users at /search/:query is used');
-    mocha_1.it('Should delete the user at /:id when ID is passed');
+    mocha_1.it('Should delete the user at /:id when ID is passed', done => {
+        user_1.UserModel.findOne({}, (_err, user) => {
+            if (user) {
+                chai.request(apiUrl)
+                    .del('/' + user._id)
+                    .then(res => {
+                    chai.expect(res.status).to.equal(200);
+                    chai.expect(res.body).to.have.property('msg').eql('User deleted.');
+                    chai.expect(res.body).to.have.property('user').not.null;
+                    done();
+                });
+            }
+        });
+    });
     after(done => {
-        user_1.UserModel.deleteMany({}, (_err) => {
+        emails.push("jeffmoneybezos3@aws.com");
+        user_1.UserModel.deleteMany({ email: emails }, (_err) => {
             done();
             process.exit(0);
         });
