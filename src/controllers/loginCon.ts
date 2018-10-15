@@ -24,7 +24,7 @@ export class LoginController implements BaseRouter {
     returnRouter() : Router {
         return Router()
             .get('/', (req: Request, res: Response) => {
-                return 
+                return 'Hello!'
             })
     }
 }
